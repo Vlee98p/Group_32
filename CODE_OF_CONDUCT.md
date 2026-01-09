@@ -61,7 +61,7 @@ representative at an online or offline event.
 [//]: # (TODO: You need to choose whom and how to contact them.)
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement.
+reported to the community leaders responsible for enforcement at [Github issues](https://github.com/UBC-MDS/DSCI_524_group32_df_optimizer/issues).
 All complaints will be reviewed and investigated promptly and fairly.
 Reports will be acknowledged within 30 days.
 
