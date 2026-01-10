@@ -36,5 +36,7 @@ def optimize_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     - The optimized DataFrame should behave identically to the original in
       downstream analysis, aside from potential minor float precision changes
       if numeric downcasting is applied.
-    """
+
+
+
     pass
