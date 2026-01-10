@@ -38,5 +38,5 @@ William Chong
 
 ## Copyright
 
-- Copyright © 2026 UBC MDS.
+- Copyright © 2026 William Chong, Wai Yan Lee, Roganci Fontelera, Mohammed Ibrahim.
 - Free software distributed under the [MIT License](./LICENSE).
