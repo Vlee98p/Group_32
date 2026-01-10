@@ -36,5 +36,29 @@ def optimize_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     - The optimized DataFrame should behave identically to the original in
       downstream analysis, aside from potential minor float precision changes
       if numeric downcasting is applied.
+
+    Examples
+    --------
+    >>> import pandas as pd
+    >>> df = pd.DataFrame({
+    ...     "status": ["pending", "shipped", "pending"],
+    ...     "quantity": [1, 2, 3]
+    ... })
+    >>> optimized_df = optimize_dataframe(df)
+    >>> optimized_df.dtypes["status"]
+    CategoricalDtype(categories=['pending', 'shipped'], ordered=False)
+    >>> optimized_df.dtypes["quantity"]
+    dtype('int8')
+
+    >>> df = pd.DataFrame({
+    ...     "region": ["US", "CA", "US", "US"],
+    ...     "price": [10.5, 12.0, 9.99, 11.25]
+    ... })
+    >>> optimized_df = optimize_dataframe(df)
+    >>> optimized_df.dtypes["region"]
+    CategoricalDtype(categories=['CA', 'US'], ordered=False)
+    >>> optimized_df.dtypes["price"]
+    dtype('float32')
     """
+    
     pass
