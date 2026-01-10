@@ -10,11 +10,11 @@ def optimize_numeric(df: pd.DataFrame) -> pd.DataFrame:
     numeric types to smaller representations while preserving values within acceptable precision limits.
 
     For integer columns:
-    - int64 → int32, int16, or int8 (depending on value range)
-    - uint64 → uint32, uint16, or uint8 (for unsigned integers)
+    - int64 → int32, int16, or int8 (depending on value range).
+    - uint64 → uint32, uint16, or uint8 (for unsigned integers).
 
     For float columns:
-    - float64 → float32 (potentially introducing minor precision loss)
+    - float64 → float32 (potentially introducing minor precision loss).
 
     The downcasting process examines the actual range of values in each column
     and selects the smallest dtype that can accommodate all values. For example,
@@ -33,9 +33,9 @@ def optimize_numeric(df: pd.DataFrame) -> pd.DataFrame:
 
     Notes
     -----
-    - Uses 'errors=ignore' to skip columns that cannot be safely downcast
-    - Float downcasting from float64 to float32 may introduce minor precision loss
-    - Integer downcasting is lossless when values fit in the target range
-    - Prints confirmation message upon successful completion
+    - Uses 'errors=ignore' to skip columns that cannot be safely downcast.
+    - Float downcasting from float64 to float32 may introduce minor precision loss.
+    - Integer downcasting is lossless when values fit in the target range.
+    - Prints confirmation message upon successful completion.
     """
     pass
