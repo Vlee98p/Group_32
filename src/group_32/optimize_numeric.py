@@ -1,6 +1,8 @@
 import pandas as pd
 
 def optimize_numeric(df: pd.DataFrame) -> pd.DataFrame:
+
+
     """
     Downcast integer and float columns to the smallest suitable numeric dtype.
 
@@ -64,6 +66,15 @@ def optimize_numeric(df: pd.DataFrame) -> pd.DataFrame:
     - Float downcasting from float64 to float32 may introduce minor precision loss.
     - Integer downcasting is lossless when values fit in the target range.
     - Prints confirmation message upon successful completion.
-    
     """
-    pass
+    for col in df.select_dtypes(include=['integer']).columns:
+        # Use pd.to_numeric with downcast='integer'
+        df[col] = pd.to_numeric(df[col], downcast='integer')
+
+    for col in df.select_dtypes(include=['floating']).columns:
+        # Use pd.to_numeric with downcast='float' (Note: check precision loss)
+        df[col] = pd.to_numeric(df[col], downcast='float')
+
+    print("✅ Numeric columns successfully downcasted.")
+    return df
+
