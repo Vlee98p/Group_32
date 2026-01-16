@@ -23,6 +23,7 @@ def test_optimize_categorical_converts_columns(sample_data):
 
     output = optimize_categorical(sample_data, max_unique_ratio=0.5)
 
+    #test function works properly
     assert str(output["city"].dtype) == "category"
     assert str(output["status"].dtype) == "category"
     assert output["name"].dtype == object
@@ -42,11 +43,15 @@ def test_optimize_categorical_threshold():
     df_before = df.copy()
 
     output2 = optimize_categorical(df, max_unique_ratio=1)
+    
+    #converts all object columns
     assert str(output2["id"].dtype) == "category"
     assert str(output2["company"].dtype) == "category"
     assert str(output2["brand"].dtype) == "category"
 
     output3 = optimize_categorical(df, max_unique_ratio=0)
+
+    #threshold > 0, no conversion
     assert output3.equals(df_before)
 
     #updated a column to None to check if column type is correct after conversion.
@@ -65,9 +70,11 @@ def test_optimize_categorical_threshold():
     output1 = optimize_categorical(df, max_unique_ratio=0.1)
     assert output1["brand"].dtype == object
 
+    #threshold > 1 -> error
     with pytest.raises(TypeError, match = re.escape("max_unique_ratio must be between 0 and 1 (inclusive)!")):
         optimize_categorical(df, max_unique_ratio=2)
 
+    #threshold < 0 -> error
     with pytest.raises(TypeError, match = re.escape("max_unique_ratio must be between 0 and 1 (inclusive)!")):
         optimize_categorical(df, max_unique_ratio=-0.5)
 
@@ -79,11 +86,14 @@ def test_optimize_categorical_no_change():
 
     output4 = optimize_categorical(df, max_unique_ratio=0.8)
 
+    #ratio < threshold -> convert
     assert str(output4["city"].dtype) == "category"
 
+    #ratio > threshold -> no conversion
     output5 = optimize_categorical(df, max_unique_ratio=0.3)
     assert output5.equals(df_before)
 
+    #incorrect threshold input
     with pytest.raises(TypeError, match = "max_unique_ratio must be a number"):
         optimize_categorical(df, max_unique_ratio= re.escape("30%"))
 
@@ -97,6 +107,7 @@ def test_optimize_categrical_empty_df():
     df = pd.DataFrame({"col1": [], "col2": []})
     
     output6 = optimize_categorical(df, max_unique_ratio=0.4)
+
     assert len(output6) == 0
     assert df.columns.tolist() == output6.columns.tolist()
 
