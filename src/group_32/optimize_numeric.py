@@ -100,23 +100,3 @@ def optimize_numeric(df: pd.DataFrame, verbose: bool = True) -> pd.DataFrame:
 
     return out
 
-
-
-
-
-
-
-
-
-
-    # for col in df.select_dtypes(include=['integer']).columns:
-    #     # Use pd.to_numeric with downcast='integer'
-    #     df[col] = pd.to_numeric(df[col], downcast='integer')
-
-    # for col in df.select_dtypes(include=['floating']).columns:
-    #     # Use pd.to_numeric with downcast='float' (Note: check precision loss)
-    #     df[col] = pd.to_numeric(df[col], downcast='float')
-
-    # print("✅ Numeric columns successfully downcasted.")
-    # return df
-
