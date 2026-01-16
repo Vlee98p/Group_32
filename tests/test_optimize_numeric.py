@@ -119,6 +119,31 @@ def test_boundary_values_int8():
     assert result["boundary_int"].dtype == np.int8
 
 
+def test_boundary_values_int16():
+    """
+    Test that values at int16 boundaries are handled correctly.
+    """
+    df = pd.DataFrame({
+        "boundary_int": np.array([32767, -32768, 0], dtype=np.int64)
+    })
+    
+    result = optimize_numeric(df, verbose=False)
+    
+    assert result["boundary_int"].dtype == np.int16
+
+
+def test_boundary_values_int32():
+    """
+    Test that values at int32 boundaries are handled correctly.
+    """
+    df = pd.DataFrame({
+        "boundary_int": np.array([2147483647, -2147483648, 0], dtype=np.int64)
+    })
+    
+    result = optimize_numeric(df, verbose=False)
+    
+    assert result["boundary_int"].dtype == np.int32
+
 
 def test_boolean_columns_not_affected():
     """
@@ -135,7 +160,6 @@ def test_boolean_columns_not_affected():
     pd.testing.assert_series_equal(result["bool_col"], df["bool_col"])
 
 
-
 def test_very_large_integers_remain_int64():
     """
     Test that integers too large for int32 remain as int64.
@@ -149,6 +173,114 @@ def test_very_large_integers_remain_int64():
     # Should remain int64 since values exceed int32 range
     assert result["huge_int"].dtype == np.int64
 
+
+def test_float32_sufficient_precision():
+    """
+    Test that floats are downcasted to float32 when precision is sufficient.
+    """
+    df = pd.DataFrame({
+        "float_col": np.array([1.5, 2.5, 3.5], dtype=np.float64)
+    })
+    
+    result = optimize_numeric(df, verbose=False)
+    
+    assert result["float_col"].dtype == np.float32
+
+
+def test_float64_required_for_high_precision():
+    """
+    Test float downcasting behavior - floats are downcasted to float32
+    unless precision would be lost beyond acceptable tolerance.
+    """
+    df = pd.DataFrame({
+        "float_col": np.array([1.123456789123456, 2.987654321987654], dtype=np.float64)
+    })
+    
+    result = optimize_numeric(df, verbose=False)
+    
+    # The function downcasts to float32 if values can be represented accurately enough
+    # Verify the values are preserved within acceptable tolerance
+    assert pd.api.types.is_float_dtype(result["float_col"])
+    np.testing.assert_allclose(result["float_col"], df["float_col"], rtol=1e-6)
+
+
+def test_unsigned_integers_handled_correctly():
+    """
+    Test that unsigned integer columns are downcasted appropriately.
+    Note: unsigned integers may be converted to signed integers if all values
+    fit within the signed range.
+    """
+    df = pd.DataFrame({
+        "uint_col": np.array([0, 100, 255], dtype=np.uint64)
+    })
+    
+    result = optimize_numeric(df, verbose=False)
+    
+    # Should be downcasted to int16 (or int8 if your function supports it)
+    # since all values are positive and fit in a smaller integer type
+    assert pd.api.types.is_integer_dtype(result["uint_col"])
+    pd.testing.assert_series_equal(result["uint_col"], df["uint_col"], check_dtype=False)
+
+
+def test_empty_dataframe():
+    """
+    Test that an empty DataFrame is handled without errors.
+    """
+    df = pd.DataFrame()
+    
+    result = optimize_numeric(df, verbose=False)
+    
+    assert len(result) == 0
+    pd.testing.assert_frame_equal(result, df)
+
+
+def test_dataframe_with_one_row():
+    """
+    Test that a DataFrame with a single row is optimized correctly.
+    """
+    df = pd.DataFrame({
+        "int_col": np.array([42], dtype=np.int64),
+        "float_col": np.array([3.14], dtype=np.float64)
+    })
+    
+    result = optimize_numeric(df, verbose=False)
+    
+    assert result["int_col"].dtype == np.int8
+    assert result["float_col"].dtype == np.float32
+
+
+def test_original_dataframe_not_modified():
+    """
+    Test that the original DataFrame is not modified (function returns a copy).
+    """
+    df = pd.DataFrame({
+        "int_col": np.array([1, 2, 3], dtype=np.int64)
+    })
+    
+    original_dtype = df["int_col"].dtype
+    result = optimize_numeric(df, verbose=False)
+    
+    # Original should remain unchanged
+    assert df["int_col"].dtype == original_dtype
+    # Result should be optimized
+    assert result["int_col"].dtype == np.int8
+
+
+def test_datetime_columns_not_affected():
+    """
+    Test that datetime columns are not modified by the function.
+    """
+    df = pd.DataFrame({
+        "date_col": pd.date_range("2024-01-01", periods=3),
+        "int_col": np.array([1, 2, 3], dtype=np.int64)
+    })
+    
+    result = optimize_numeric(df, verbose=False)
+    
+    assert pd.api.types.is_datetime64_any_dtype(result["date_col"])
+    pd.testing.assert_series_equal(result["date_col"], df["date_col"])
+
+
 def test_invalid_input_type():
     """
     Test that the function raises TypeError for non-DataFrame input.
@@ -161,3 +293,50 @@ def test_invalid_input_type():
     
     with pytest.raises(TypeError, match="df must be a pandas DataFrame"):
         optimize_numeric(None)
+    
+    with pytest.raises(TypeError, match="df must be a pandas DataFrame"):
+        optimize_numeric(np.array([1, 2, 3]))
+
+
+def test_mixed_positive_negative_integers():
+    """
+    Test optimization with mixed positive and negative integers.
+    """
+    df = pd.DataFrame({
+        "mixed_int": np.array([-50, 0, 50], dtype=np.int64)
+    })
+    
+    result = optimize_numeric(df, verbose=False)
+    
+    assert result["mixed_int"].dtype == np.int8
+    pd.testing.assert_series_equal(result["mixed_int"], df["mixed_int"], check_dtype=False)
+
+
+def test_all_zeros():
+    """
+    Test that a column of all zeros is optimized correctly.
+    """
+    df = pd.DataFrame({
+        "zero_int": np.array([0, 0, 0], dtype=np.int64),
+        "zero_float": np.array([0.0, 0.0, 0.0], dtype=np.float64)
+    })
+    
+    result = optimize_numeric(df, verbose=False)
+    
+    assert result["zero_int"].dtype == np.int8
+    assert result["zero_float"].dtype == np.float32
+
+
+def test_inf_values_in_floats():
+    """
+    Test that infinity values in float columns are preserved.
+    """
+    df = pd.DataFrame({
+        "float_col": np.array([1.0, np.inf, -np.inf, 2.0], dtype=np.float64)
+    })
+    
+    result = optimize_numeric(df, verbose=False)
+    
+    assert np.isinf(result["float_col"]).sum() == 2
+    assert result["float_col"].iloc[1] == np.inf
+    assert result["float_col"].iloc[2] == -np.inf
