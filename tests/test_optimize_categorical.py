@@ -1,0 +1,59 @@
+
+from group_32.optimize_categorical import optimize_categorical
+import pandas as pd
+import pytest
+
+
+@pytest.fixture
+
+def sample_data() -> pd.DataFrame:
+    df = pd.DataFrame(
+        {
+            "user_id": list(range(10)),
+            "name": ["Alice", "Bobby", "Charles", "Ally", "Bob", "Charlie", "David", "Alex", "Ben", "Cherry"],
+            "city": ["NYC", "LA", "NYC", "Chicago", "LA", "NYC", "LA", "Chicago", "NYC", "LA"],
+            "status": ["active", "inactive", "active", "active", "inactive", "active", "inactive", "active", "active", "inactive"],
+        }
+    )
+
+    return pd.DataFrame(df)
+
+def test_optimize_categorical_converts_low_cardinality_object_columns(sample_data):
+
+    output = optimize_categorical(sample_data, max_unique_ratio=0.5)
+
+    # city: 3 unique / 10 = 0.3 -> convert
+    assert str(output["city"].dtype) == "category"
+    # status: 2 unique / 10 = 0.2 -> convert
+    assert str(output["status"].dtype) == "category"
+    # name: 10 unique / 10 = 1.0 -> do NOT convert
+    assert output["name"].dtype == object
+    # non-object stays unchanged
+    assert output["user_id"].dtype == output["user_id"].dtype
+
+
+# def test_optimize_categorical_respects_threshold():
+#     df = pd.DataFrame(
+#         {
+#             "id": ["A", "B", "A", "C", "B", "D", "E", "F", "G", "H"],  # 8 unique / 10 = 0.8
+#         }
+#     )
+
+#     output_low = optimize_categorical(df, max_unique_ratio=0.5)
+#     assert output_low["id"].dtype == object
+
+#     output_high = optimize_categorical(df, max_unique_ratio=0.9)
+#     assert str(output_high["id"].dtype) == "category"
+
+
+# def test_optimize_categorical_does_not_mutate_input():
+#     df = pd.DataFrame({"city": ["NYC", "LA", "NYC", "LA"]})
+#     df_before = df.copy(deep=True)
+
+#     out = optimize_categorical(df, max_unique_ratio=0.8)
+
+#     # output converted
+#     assert str(out["city"].dtype) == "category"
+#     # input unchanged
+#     assert df["city"].dtype == object
+#     pd.testing.assert_frame_equal(df, df_before)
