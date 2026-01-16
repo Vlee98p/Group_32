@@ -7,7 +7,7 @@ def optimize_categorical(df: pd.DataFrame, max_unique_ratio: float = 0.5) -> pd.
     This function makes a copy of a DataFrame (df) and looks through all the string columns. 
     It counts the number of unique strings and calculates the ratio of the unique values to the total number of rows. 
     If this ratio is below a chosen threshold in this function, it converts the column to category dtype.
-    This function returns a dataframe with the converted columns #and prints the number of columns that have been updated.
+    This function returns a dataframe with the converted columns and prints the number of columns that have been updated.
     Parameters
     ----------
     df : pd.DataFrame
@@ -47,7 +47,7 @@ def optimize_categorical(df: pd.DataFrame, max_unique_ratio: float = 0.5) -> pd.
     city     category
     status   category
     dtype: object
-    #>>> Converted 2 column(s) to 'category' dtype.
+    >>> Converted 2 column(s) to 'category' dtype.
 
     >>> optimized_df.info()
     <class 'pandas.core.frame.DataFrame'>
