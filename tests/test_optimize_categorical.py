@@ -2,6 +2,7 @@
 from group_32.optimize_categorical import optimize_categorical
 import pandas as pd
 import pytest
+import re
 
 
 @pytest.fixture
@@ -59,14 +60,14 @@ def test_optimize_categorical_threshold():
     output = optimize_categorical(df, max_unique_ratio=0.1)
     assert output["brand"].dtype == object
 
-    output = optimize_categorical(df, max_unique_ratio=2)
-    #error
+    with pytest.raises(TypeError, match = re.escape("max_unique_ratio must be between 0 and 1 (inclusive)!")):
+        optimize_categorical(df, max_unique_ratio=2)
 
     output = optimize_categorical(df, max_unique_ratio=0)
     #pd.testing.assert_frame_equal(df, df_before)
 
-    output = optimize_categorical(df, max_unique_ratio=-0.5)
-    #error
+    with pytest.raises(TypeError, match = re.escape("max_unique_ratio must be between 0 and 1 (inclusive)!")):
+        optimize_categorical(df, max_unique_ratio=-0.5)
 
 def test_optimize_categorical_does_not_mutate_input():
     df = pd.DataFrame(
