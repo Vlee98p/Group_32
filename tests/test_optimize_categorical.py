@@ -4,31 +4,36 @@ import pandas as pd
 import pytest
 import re
 
-
 @pytest.fixture
 
-def sample_data() -> pd.DataFrame:
+def test_optimize_categorical_converts_columns(capsys):
+
     df = pd.DataFrame(
         {
             "user_id": list(range(10)),
             "name": ["Alice", "Bobby", "Charles", "Ally", "Bob", "Charlie", "David", "Alex", "Ben", "Cherry"],
             "city": ["NYC", "LA", "NYC", "Chicago", "LA", "NYC", "LA", "Chicago", "NYC", "LA"],
             "status": ["active", "inactive", "active", "active", "inactive", "active", "inactive", "active", "active", "inactive"],
+            "score": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+            "binary_flag": [True, False, True, False, True, False, True, False, True, False]
         }
     )
 
-    return df
+    output = optimize_categorical(df, max_unique_ratio=0.5)
 
-def test_optimize_categorical_converts_columns(sample_data):
-
-    output = optimize_categorical(sample_data, max_unique_ratio=0.5)
-
-    #test function works properly
+    # Test function converts appropriate columns
     assert str(output["city"].dtype) == "category"
     assert str(output["status"].dtype) == "category"
-    assert output["name"].dtype == object
-    assert sample_data["user_id"].dtype == output["user_id"].dtype
 
+    # Test that other columns remain unchanged
+    assert output["name"].dtype == object
+    assert df["user_id"].dtype == output["user_id"].dtype
+    assert df["score"].dtype == output["score"].dtype
+    assert df["binary_flag"].dtype == output["binary_flag"].dtype
+
+    #Test print
+    captured = capsys.readouterr()
+    assert "Converted 2 column(s) to 'category' dtype." in captured.out
 
 def test_optimize_categorical_threshold():
     df = pd.DataFrame(
@@ -44,20 +49,19 @@ def test_optimize_categorical_threshold():
 
     output2 = optimize_categorical(df, max_unique_ratio=1)
     
-    #converts all object columns
+    # Test threshold = 1 (convert all string columns)
     assert str(output2["id"].dtype) == "category"
     assert str(output2["company"].dtype) == "category"
     assert str(output2["brand"].dtype) == "category"
 
+    # Test threshold = 0 (convert none)
     output3 = optimize_categorical(df, max_unique_ratio=0)
-
-    #threshold > 0, no conversion
     assert output3.equals(df_before)
 
-    #updated a column to None to check if column type is correct after conversion.
+    # Test with None values
     df["brand"] = None
 
-    #test different thresholds
+    #Test different thresholds
     output_low = optimize_categorical(df, max_unique_ratio=0.5)
     assert output_low["id"].dtype == object
 
@@ -78,24 +82,25 @@ def test_optimize_categorical_threshold():
     with pytest.raises(TypeError, match = re.escape("max_unique_ratio must be between 0 and 1 (inclusive)!")):
         optimize_categorical(df, max_unique_ratio=-0.5)
 
-def test_optimize_categorical_no_change():
+def test_optimize_categorical_invalid_inputs():
     df = pd.DataFrame(
         {"city": ["NYC", "LA", "NYC", "LA"]}
         )
-    df_before = df.copy()
 
-    output4 = optimize_categorical(df, max_unique_ratio=0.8)
-
-    #ratio < threshold -> convert
-    assert str(output4["city"].dtype) == "category"
-
-    #ratio > threshold -> no conversion
-    output5 = optimize_categorical(df, max_unique_ratio=0.3)
-    assert output5.equals(df_before)
-
-    #incorrect threshold input
-    with pytest.raises(TypeError, match = "max_unique_ratio must be a number"):
-        optimize_categorical(df, max_unique_ratio= re.escape("30%"))
+    # Test invalid threshold values
+    with pytest.raises(TypeError, match= re.escape("max_unique_ratio must be between 0 and 1 (inclusive)!")):
+        optimize_categorical(df, max_unique_ratio=2)
+    
+    with pytest.raises(TypeError, match= re.escape("max_unique_ratio must be between 0 and 1 (inclusive)!")):
+        optimize_categorical(df, max_unique_ratio=-0.5)
+    
+    # Test invalid type for threshold
+    with pytest.raises(TypeError, match="max_unique_ratio must be a number"):
+        optimize_categorical(df, max_unique_ratio="30%")
+    
+    # Test invalid df input
+    with pytest.raises(TypeError, match="df must be a pandas DataFrame"):
+        optimize_categorical(["A", "B", "C"], max_unique_ratio=0.8)
 
 def test_optimize_categorical_not_df():
     df = ["A", "B", "C", "D", "E"]
@@ -103,12 +108,30 @@ def test_optimize_categorical_not_df():
     with pytest.raises(TypeError, match = "df must be a pandas DataFrame"):
         optimize_categorical(df, max_unique_ratio=0.8)
 
-def test_optimize_categrical_empty_df():
-    df = pd.DataFrame({"col1": [], "col2": []})
+def test_optimize_categrical_empty_and_special_cases():
     
-    output6 = optimize_categorical(df, max_unique_ratio=0.4)
+    # Test empty DataFrame
+    df_empty = pd.DataFrame({"col1": [], "col2": []})
 
-    assert len(output6) == 0
-    assert df.columns.tolist() == output6.columns.tolist()
-
+    output_empty = optimize_categorical(df_empty, max_unique_ratio=0.4)
+    assert len(output_empty) == 0
+    assert df_empty.columns.tolist() == output_empty.columns.tolist()
     
+    # Test DataFrame with only non-string columns
+    df_numeric = pd.DataFrame({
+        "int_col": [1, 2, 3],
+        "float_col": [1.1, 2.2, 3.3],
+        "bool_col": [True, False, True]
+    })
+    output_numeric = optimize_categorical(df_numeric, max_unique_ratio=0.5)
+    assert df_numeric.equals(output_numeric)  # No changes expected
+    
+    # Test DataFrame with NaN values in string columns
+    df_nan = pd.DataFrame({
+        "category": ["A", "B", "A", None, "B", "A", None, "B", "A", "B"],
+        "text": ["text"] * 10
+    })
+    output_nan = optimize_categorical(df_nan, max_unique_ratio=0.5)
+    # Should handle NaN appropriately
+
+    assert str(output_nan["category"].dtype) == "category"
