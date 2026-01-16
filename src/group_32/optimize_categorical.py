@@ -41,13 +41,14 @@ def optimize_categorical(df: pd.DataFrame, max_unique_ratio: float = 0.5) -> pd.
     dtype: object
     
     >>> optimized_df = optimize_categorical(df, max_unique_ratio=0.5)
+    >>> Converted 2 column(s) to 'category' dtype.
+    
     >>> optimized_df.dtypes
     user_id  int64
     name     object
     city     category
     status   category
     dtype: object
-    >>> Converted 2 column(s) to 'category' dtype.
 
     >>> optimized_df.info()
     <class 'pandas.core.frame.DataFrame'>
