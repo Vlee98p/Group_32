@@ -93,4 +93,11 @@ def test_optimize_categorical_not_df():
     with pytest.raises(TypeError, match = "df must be a pandas DataFrame"):
         optimize_categorical(df, max_unique_ratio=0.8)
 
+def test_optimize_categrical_empty_df():
+    df = pd.DataFrame({"col1": [], "col2": []})
+    
+    output6 = optimize_categorical(df, max_unique_ratio=0.4)
+    assert len(output6) == 0
+    assert df.columns.tolist() == output6.columns.tolist()
+
     
