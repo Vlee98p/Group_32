@@ -1,4 +1,4 @@
-def _analyze_special_columns(df: pd.DataFrame):
+def optimize_special(df: pd.DataFrame):
     """
     Identify and report columns requiring special handling based on content patterns.
 
@@ -41,11 +41,11 @@ def _analyze_special_columns(df: pd.DataFrame):
     -----
     - Uses regex patterns to match common naming conventions
     - Analyzes both column names and data characteristics
-    - Provides emoji-coded output for easy visual scanning:
-      :pushpin: = Unique ID
-      :earth_africa: = Coordinates
-      :memo: = Text Entity
-      :1234: = Categorical/Ordinal
+    - Provides tag output for easy visual scanning:
+      <Unique ID>
+      <Coordinates>
+      <Text Entity>
+      <Categorical/Ordinal>
     - Detection heuristics may not catch all special cases; review output carefully
 
     Examples
@@ -62,11 +62,11 @@ def _analyze_special_columns(df: pd.DataFrame):
     >>> _analyze_special_columns(df)
     
     --- Special Column Analysis ---
-    📌 customer_id: Identified as potential **Unique ID**. High cardinality (not optimized to 'category').
-    🌍 latitude: Identified as **Latitude/Longitude**. Already optimized to a float dtype.
-    🌍 longitude: Identified as **Latitude/Longitude**. Already optimized to a float dtype.
-    📝 full_name: Identified as **Text Entity (Name/Address)**. Stays as string/object due to high variability.
-    🔢 membership_level: **Categorical/Ordinal** (Type is 'category').
+    customer_id: Identified as potential **Unique ID**. High cardinality (not optimized to 'category').
+    latitude: Identified as **Latitude/Longitude**. Already optimized to a float dtype.
+    longitude: Identified as **Latitude/Longitude**. Already optimized to a float dtype.
+    full_name: Identified as **Text Entity (Name/Address)**. Stays as string/object due to high variability.
+    membership_level: **Categorical/Ordinal** (Type is 'category').
     
     >>> # Another example with different patterns
     >>> df2 = pd.DataFrame({
@@ -79,8 +79,8 @@ def _analyze_special_columns(df: pd.DataFrame):
     >>> _analyze_special_columns(df2)
     
     --- Special Column Analysis ---
-    📌 order_key: Identified as potential **Unique ID**. High cardinality (not optimized to 'category').
-    🌍 lat: Identified as **Latitude/Longitude**. Already optimized to a float dtype.
-    📝 delivery_address: Identified as **Text Entity (Name/Address)**. Stays as string/object due to high variability.
+    order_key: Identified as potential **Unique ID**. High cardinality (not optimized to 'category').
+    lat: Identified as **Latitude/Longitude**. Already optimized to a float dtype.
+    delivery_address: Identified as **Text Entity (Name/Address)**. Stays as string/object due to high variability.
     
     """
