@@ -1,4 +1,14 @@
+from __future__ import annotations
+
+import re
+from typing import Optional
+
+import numpy as np
 import pandas as pd
+
+from .optimize_numeric import optimize_numeric
+from .optimize_categorical import optimize_categorical
+from .optimize_special import optimize_special
 
 def optimize_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -60,5 +70,17 @@ def optimize_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     >>> optimized_df.dtypes["price"]
     dtype('float32')
     """
-    
-    pass
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError("df must be a pandas DataFrame")
+
+    # Always work on copies (helpers already copy, but keep wrapper intent explicit)
+    out = df.copy(deep=True)
+
+    # Apply safe optimizations
+    out = optimize_numeric(out)
+    out = optimize_categorical(out, max_unique_ratio=0.5)
+
+    # Report special columns (no mutation)
+    optimize_special(out)
+
+    return out
