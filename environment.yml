@@ -1,10 +1,14 @@
-name: dsci-524-group32
+name: 524
 channels:
   - conda-forge
 dependencies:
   # core interpreter
   - python=3.12
   - pip
+
+  # runtime deps (match pyproject.toml)
+  - numpy
+  - pandas
 
   # testing & dev tooling
   - pytest

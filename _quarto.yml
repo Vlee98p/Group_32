@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Dataframe Optimizer"
+  navbar:
+    left:
+      - text: "Reference"
+        href: reference/index.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+
+quartodoc:
+  package: group_32
+  dir: reference
+  sections:
+    - title: Main API
+      desc: Main user-facing function.
+      contents:
+        - optimize_dataframe.optimize_dataframe
+
+    - title: Column optimizers
+      desc: Helpers for optimizing different column types.
+      contents:
+        - optimize_numeric.optimize_numeric
+        - optimize_categorical.optimize_categorical
+        - optimize_special.optimize_special
