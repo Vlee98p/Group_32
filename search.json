@@ -56,46 +56,60 @@
     "text": "This Code of Conduct is adapted from the Contributor Covenant, version 2.0, available at https://www.contributor-covenant.org/version/2/0/code_of_conduct.html.\nCommunity Impact Guidelines were inspired by Mozilla’s code of conduct enforcement ladder.\nFor answers to common questions about this code of conduct, see the FAQ at https://www.contributor-covenant.org/faq. Translations are available at https://www.contributor-covenant.org/translations."
   },
   {
-    "objectID": "Submissions/milestone1.html",
-    "href": "Submissions/milestone1.html",
-    "title": "Dataframe Optimizer",
+    "objectID": "reference/optimize_dataframe.optimize_dataframe.html",
+    "href": "reference/optimize_dataframe.optimize_dataframe.html",
+    "title": "optimize_dataframe.optimize_dataframe",
     "section": "",
-    "text": "GitHub Repository URL:\nhttps://github.com/UBC-MDS/DSCI_524_group32_df_optimizer\nGitHub Release URL (v0.0.1):\nhttps://github.com/UBC-MDS/DSCI_524_group32_df_optimizer/releases/tag/0.0.1"
+    "text": "optimize_dataframe.optimize_dataframe(df)\nThis function creates an optimized copy of a pandas DataFrame by applying a series of memory-reduction strategies while preserving the original data.\nIt serves as the main wrapper function for the package and coordinates multiple optimization steps: - Numeric columns are downcast to smaller, safe data types where possible - Low-cardinality string columns are converted to pandas ‘category’ dtype - Special columns (e.g., IDs, coordinates, high-cardinality text) are identified and reported but not modified\nThe original DataFrame is never mutated; all operations are performed on a copy.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndf\npd.DataFrame\nThe input pandas DataFrame to be optimized.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\npd.DataFrame\nA new DataFrame with optimized data types and reduced memory usage.\n\n\n\n\n\n\n\nThis function acts as a wrapper that calls lower-level helper functions such as numeric and categorical optimizers.\nThe optimization process is designed to be transparent and reproducible; a summary of changes and memory savings may be printed.\nThis function prioritizes safety over aggressiveness and avoids modifying columns that could lead to unexpected behavior.\nThe optimized DataFrame should behave identically to the original in downstream analysis, aside from potential minor float precision changes if numeric downcasting is applied.\n\n\n\n\n&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; df = pd.DataFrame({\n...     \"status\": [\"pending\", \"shipped\", \"pending\"],\n...     \"quantity\": [1, 2, 3]\n... })\n&gt;&gt;&gt; optimized_df = optimize_dataframe(df)\n&gt;&gt;&gt; optimized_df.dtypes[\"status\"]\nCategoricalDtype(categories=['pending', 'shipped'], ordered=False)\n&gt;&gt;&gt; optimized_df.dtypes[\"quantity\"]\ndtype('int8')\n&gt;&gt;&gt; df = pd.DataFrame({\n...     \"region\": [\"US\", \"CA\", \"US\", \"US\"],\n...     \"price\": [10.5, 12.0, 9.99, 11.25]\n... })\n&gt;&gt;&gt; optimized_df = optimize_dataframe(df)\n&gt;&gt;&gt; optimized_df.dtypes[\"region\"]\nCategoricalDtype(categories=['CA', 'US'], ordered=False)\n&gt;&gt;&gt; optimized_df.dtypes[\"price\"]\ndtype('float32')"
   },
   {
-    "objectID": "Submissions/milestone1.html#milestone-1-submission-links",
-    "href": "Submissions/milestone1.html#milestone-1-submission-links",
-    "title": "Dataframe Optimizer",
+    "objectID": "reference/optimize_dataframe.optimize_dataframe.html#parameters",
+    "href": "reference/optimize_dataframe.optimize_dataframe.html#parameters",
+    "title": "optimize_dataframe.optimize_dataframe",
     "section": "",
-    "text": "GitHub Repository URL:\nhttps://github.com/UBC-MDS/DSCI_524_group32_df_optimizer\nGitHub Release URL (v0.0.1):\nhttps://github.com/UBC-MDS/DSCI_524_group32_df_optimizer/releases/tag/0.0.1"
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ndf\npd.DataFrame\nThe input pandas DataFrame to be optimized.\nrequired"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Dataframe Optimizer",
+    "objectID": "reference/optimize_dataframe.optimize_dataframe.html#returns",
+    "href": "reference/optimize_dataframe.optimize_dataframe.html#returns",
+    "title": "optimize_dataframe.optimize_dataframe",
     "section": "",
-    "text": "Welcome to the docs for Dataframe Optimizer.\nUse the Reference tab for the API docs."
+    "text": "Name\nType\nDescription\n\n\n\n\n\npd.DataFrame\nA new DataFrame with optimized data types and reduced memory usage."
   },
   {
-    "objectID": "CHANGELOG.html",
-    "href": "CHANGELOG.html",
-    "title": "Changelog",
+    "objectID": "reference/optimize_dataframe.optimize_dataframe.html#notes",
+    "href": "reference/optimize_dataframe.optimize_dataframe.html#notes",
+    "title": "optimize_dataframe.optimize_dataframe",
     "section": "",
-    "text": "All notable changes to this project will be documented in this file.\nThe format is based on Keep a Changelog, and this project adheres to Semantic Versioning.\n\n\n\nUpcoming features and fixes\n\n\n\n\n\nFirst release"
+    "text": "This function acts as a wrapper that calls lower-level helper functions such as numeric and categorical optimizers.\nThe optimization process is designed to be transparent and reproducible; a summary of changes and memory savings may be printed.\nThis function prioritizes safety over aggressiveness and avoids modifying columns that could lead to unexpected behavior.\nThe optimized DataFrame should behave identically to the original in downstream analysis, aside from potential minor float precision changes if numeric downcasting is applied."
   },
   {
-    "objectID": "CHANGELOG.html#unreleased",
-    "href": "CHANGELOG.html#unreleased",
-    "title": "Changelog",
+    "objectID": "reference/optimize_dataframe.optimize_dataframe.html#examples",
+    "href": "reference/optimize_dataframe.optimize_dataframe.html#examples",
+    "title": "optimize_dataframe.optimize_dataframe",
     "section": "",
-    "text": "Upcoming features and fixes"
+    "text": "&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; df = pd.DataFrame({\n...     \"status\": [\"pending\", \"shipped\", \"pending\"],\n...     \"quantity\": [1, 2, 3]\n... })\n&gt;&gt;&gt; optimized_df = optimize_dataframe(df)\n&gt;&gt;&gt; optimized_df.dtypes[\"status\"]\nCategoricalDtype(categories=['pending', 'shipped'], ordered=False)\n&gt;&gt;&gt; optimized_df.dtypes[\"quantity\"]\ndtype('int8')\n&gt;&gt;&gt; df = pd.DataFrame({\n...     \"region\": [\"US\", \"CA\", \"US\", \"US\"],\n...     \"price\": [10.5, 12.0, 9.99, 11.25]\n... })\n&gt;&gt;&gt; optimized_df = optimize_dataframe(df)\n&gt;&gt;&gt; optimized_df.dtypes[\"region\"]\nCategoricalDtype(categories=['CA', 'US'], ordered=False)\n&gt;&gt;&gt; optimized_df.dtypes[\"price\"]\ndtype('float32')"
   },
   {
-    "objectID": "CHANGELOG.html#section",
-    "href": "CHANGELOG.html#section",
-    "title": "Changelog",
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "Function reference",
     "section": "",
-    "text": "First release"
+    "text": "Main user-facing function.\n\n\n\noptimize_dataframe.optimize_dataframe\nThis function creates an optimized copy of a pandas DataFrame by applying\n\n\n\n\n\n\nHelpers for optimizing different column types.\n\n\n\noptimize_numeric.optimize_numeric\nDowncast integer and float columns to the smallest suitable numeric dtype.\n\n\noptimize_categorical.optimize_categorical\nThis function makes a copy of a DataFrame (df) and looks through all the string columns.\n\n\noptimize_special.optimize_special\nIdentify and report columns requiring special handling based on content patterns."
+  },
+  {
+    "objectID": "reference/index.html#main-api",
+    "href": "reference/index.html#main-api",
+    "title": "Function reference",
+    "section": "",
+    "text": "Main user-facing function.\n\n\n\noptimize_dataframe.optimize_dataframe\nThis function creates an optimized copy of a pandas DataFrame by applying"
+  },
+  {
+    "objectID": "reference/index.html#column-optimizers",
+    "href": "reference/index.html#column-optimizers",
+    "title": "Function reference",
+    "section": "",
+    "text": "Helpers for optimizing different column types.\n\n\n\noptimize_numeric.optimize_numeric\nDowncast integer and float columns to the smallest suitable numeric dtype.\n\n\noptimize_categorical.optimize_categorical\nThis function makes a copy of a DataFrame (df) and looks through all the string columns.\n\n\noptimize_special.optimize_special\nIdentify and report columns requiring special handling based on content patterns."
   },
   {
     "objectID": "CONTRIBUTING.html",
@@ -119,6 +133,41 @@
     "text": "Ready to contribute? Here’s how to set up DSCI_524_df_optimizer for local development.\n\nFork the https://github.com/UBC-MDS/DSCI_524_group32_df_optimizer repository on GitHub.\nClone your fork locally (if you want to work locally)\ngit clone git@github.com:UBC-MDS/DSCI_524_group32_df_optimizer.git\nInstall hatch.\nCreate a branch for local development using the default branch (typically main) as a starting point. Use fix or feat as a prefix for your branch name.\ngit checkout main\ngit checkout -b fix-name-of-your-bugfix\nNow you can make your changes locally.\nWhen you’re done making changes, apply the quality assurance tools and check that your changes pass our test suite. This is all included with tox\nhatch run test:run\nCommit your changes and push your branch to GitHub. Please use semantic commit messages.\ngit add .\ngit commit -m \"fix: summarize your changes\"\ngit push -u origin fix-name-of-your-bugfix\nOpen the link displayed in the message when pushing your new branch in order to submit a pull request.\n\n\n\nBefore you submit a pull request, check that it meets these guidelines:\n\nThe pull request should include tests.\nIf the pull request adds functionality, the docs should be updated. Put your new functionality into a function with a docstring.\nYour pull request will automatically be checked by the full test suite. It needs to pass all of them before it can be considered for merging."
   },
   {
+    "objectID": "CHANGELOG.html",
+    "href": "CHANGELOG.html",
+    "title": "Changelog",
+    "section": "",
+    "text": "All notable changes to this project will be documented in this file.\nThe format is based on Keep a Changelog, and this project adheres to Semantic Versioning.\n\n\n\nUpcoming features and fixes\n\n\n\n\n\nFirst release"
+  },
+  {
+    "objectID": "CHANGELOG.html#unreleased",
+    "href": "CHANGELOG.html#unreleased",
+    "title": "Changelog",
+    "section": "",
+    "text": "Upcoming features and fixes"
+  },
+  {
+    "objectID": "CHANGELOG.html#section",
+    "href": "CHANGELOG.html#section",
+    "title": "Changelog",
+    "section": "",
+    "text": "First release"
+  },
+  {
+    "objectID": "Submissions/milestone1.html",
+    "href": "Submissions/milestone1.html",
+    "title": "Dataframe Optimizer",
+    "section": "",
+    "text": "GitHub Repository URL:\nhttps://github.com/UBC-MDS/DSCI_524_group32_df_optimizer\nGitHub Release URL (v0.0.1):\nhttps://github.com/UBC-MDS/DSCI_524_group32_df_optimizer/releases/tag/0.0.1"
+  },
+  {
+    "objectID": "Submissions/milestone1.html#milestone-1-submission-links",
+    "href": "Submissions/milestone1.html#milestone-1-submission-links",
+    "title": "Dataframe Optimizer",
+    "section": "",
+    "text": "GitHub Repository URL:\nhttps://github.com/UBC-MDS/DSCI_524_group32_df_optimizer\nGitHub Release URL (v0.0.1):\nhttps://github.com/UBC-MDS/DSCI_524_group32_df_optimizer/releases/tag/0.0.1"
+  },
+  {
     "objectID": "DEVELOPMENT.html",
     "href": "DEVELOPMENT.html",
     "title": "Development Guide",
@@ -131,5 +180,117 @@
     "title": "Development Guide",
     "section": "",
     "text": "You can build your package using the environment and scripts defined in the build tables:\nhatch run build:check\nThis script builds and checks the output distribution files of your package.\nThis build environment table declares that pip and twine should be added to that environment. Adding pip to the environment ensures that it is a current, up-to-date version.\n[tool.hatch.envs.build]\ndescription = \"\"\"Build and test your package.\"\"\"\ndependencies = [\n    \"pip\",\n    \"twine\",\n]\ndetached = true\n# This table installs created the command hatch run install:check which will build and check your package.\n[tool.hatch.envs.install.scripts]\ncheck = [\n    \"pip check\",\n    \"hatch build {args:--clean}\",\n    \"twine check dist/*\",\n]\nThis uses the above environment and tells hatch to run\n\npip check, # verifies your dependencies\nhatch build --clean\n\ntwine check dist/* # this checks your distribution for metadata and other potential issues. to build and test your package."
+  },
+  {
+    "objectID": "reference/optimize_numeric.optimize_numeric.html",
+    "href": "reference/optimize_numeric.optimize_numeric.html",
+    "title": "optimize_numeric.optimize_numeric",
+    "section": "",
+    "text": "optimize_numeric.optimize_numeric(df, verbose=True)\nDowncast integer and float columns to the smallest suitable numeric dtype.\nThis internal helper function processes all numeric columns in the DataFrame, attempting to reduce their memory footprint through intelligent downcasting. The function uses pandas’ built-in downcast functionality to safely convert numeric types to smaller representations while preserving values within acceptable precision limits.\nFor integer columns: - int64 → int32, int16, or int8 (depending on value range). - uint64 → uint32, uint16, or uint8 (for unsigned integers).\nFor float columns: - float64 → float32 (potentially introducing minor precision loss).\nThe downcasting process examines the actual range of values in each column and selects the smallest dtype that can accommodate all values. For example, a column with values ranging from 0-255 stored as int64 (8 bytes) can be safely downcast to uint8 (1 byte), achieving 87.5% memory reduction.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndf\npd.DataFrame\nThe DataFrame containing numeric columns to be optimized.\nrequired\n\n\nverbose\nbool\nIf True, prints memory usage statistics before and after optimization.\nTrue\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\npd.DataFrame\nThe DataFrame with optimized numeric column dtypes.\n\n\n\n\n\n\n&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; import numpy as np\n&gt;&gt;&gt;\n&gt;&gt;&gt; df = pd.DataFrame({\n...     \"int_col\": np.array([1, 2, 3], dtype=np.int64),\n...     \"big_int_col\": np.array([1000, 2000, 3000], dtype=np.int64),\n...     \"float_col\": np.array([0.1, 0.2, 0.3], dtype=np.float64),\n...     \"non_numeric\": [\"a\", \"b\", \"c\"]\n... })\n&gt;&gt;&gt;\n&gt;&gt;&gt; df.dtypes\nint_col          int64\nbig_int_col      int64\nfloat_col      float64\nnon_numeric     object\ndtype: object\n&gt;&gt;&gt;\n&gt;&gt;&gt; optimized_df = optimize_numeric(df)\nMemory reduced from 0.XX MB to 0.XX MB (XX.X% reduction)\n&gt;&gt;&gt; optimized_df.dtypes\nint_col            int8\nbig_int_col       int16\nfloat_col       float32\nnon_numeric       object\ndtype: object\n\n\n\n\nUses try-except to skip columns that cannot be safely downcast.\nFloat downcasting from float64 to float32 may introduce minor precision loss.\nInteger downcasting is lossless when values fit in the target range.\nFailed conversions are silently skipped, preserving original dtypes."
+  },
+  {
+    "objectID": "reference/optimize_numeric.optimize_numeric.html#parameters",
+    "href": "reference/optimize_numeric.optimize_numeric.html#parameters",
+    "title": "optimize_numeric.optimize_numeric",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ndf\npd.DataFrame\nThe DataFrame containing numeric columns to be optimized.\nrequired\n\n\nverbose\nbool\nIf True, prints memory usage statistics before and after optimization.\nTrue"
+  },
+  {
+    "objectID": "reference/optimize_numeric.optimize_numeric.html#returns",
+    "href": "reference/optimize_numeric.optimize_numeric.html#returns",
+    "title": "optimize_numeric.optimize_numeric",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\npd.DataFrame\nThe DataFrame with optimized numeric column dtypes."
+  },
+  {
+    "objectID": "reference/optimize_numeric.optimize_numeric.html#examples",
+    "href": "reference/optimize_numeric.optimize_numeric.html#examples",
+    "title": "optimize_numeric.optimize_numeric",
+    "section": "",
+    "text": "&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; import numpy as np\n&gt;&gt;&gt;\n&gt;&gt;&gt; df = pd.DataFrame({\n...     \"int_col\": np.array([1, 2, 3], dtype=np.int64),\n...     \"big_int_col\": np.array([1000, 2000, 3000], dtype=np.int64),\n...     \"float_col\": np.array([0.1, 0.2, 0.3], dtype=np.float64),\n...     \"non_numeric\": [\"a\", \"b\", \"c\"]\n... })\n&gt;&gt;&gt;\n&gt;&gt;&gt; df.dtypes\nint_col          int64\nbig_int_col      int64\nfloat_col      float64\nnon_numeric     object\ndtype: object\n&gt;&gt;&gt;\n&gt;&gt;&gt; optimized_df = optimize_numeric(df)\nMemory reduced from 0.XX MB to 0.XX MB (XX.X% reduction)\n&gt;&gt;&gt; optimized_df.dtypes\nint_col            int8\nbig_int_col       int16\nfloat_col       float32\nnon_numeric       object\ndtype: object"
+  },
+  {
+    "objectID": "reference/optimize_numeric.optimize_numeric.html#notes",
+    "href": "reference/optimize_numeric.optimize_numeric.html#notes",
+    "title": "optimize_numeric.optimize_numeric",
+    "section": "",
+    "text": "Uses try-except to skip columns that cannot be safely downcast.\nFloat downcasting from float64 to float32 may introduce minor precision loss.\nInteger downcasting is lossless when values fit in the target range.\nFailed conversions are silently skipped, preserving original dtypes."
+  },
+  {
+    "objectID": "reference/optimize_special.optimize_special.html",
+    "href": "reference/optimize_special.optimize_special.html",
+    "title": "optimize_special.optimize_special",
+    "section": "",
+    "text": "optimize_special.optimize_special(df)\nIdentify and report columns requiring special handling based on content patterns.\nThis helper function performs pattern-based analysis to detect columns that typically require domain-specific handling and should not undergo standard optimizations. The function uses regular expressions to match common naming conventions and analyzes column characteristics (cardinality, data type) to classify columns into several special categories:\n\nUnique Identifiers: Columns with names such as ‘id’, ‘uuid’, or ‘key’ that have very high cardinality (close to one unique value per row). These columns are reported but not modified to preserve referential integrity.\nGeographic Coordinates: Columns named ‘latitude’, ‘longitude’, ‘lat’, or ‘lon’ that typically store geographic coordinate data. These are usually already optimized to a float dtype by numeric optimization and are flagged for user awareness.\nText Entities: High-cardinality string columns that do not match ID patterns, often representing names, addresses, or free-form text. These remain as object dtype because categorical conversion would be inefficient.\nCategorical or Ordinal Data: Columns that are already of pandas ‘category’ dtype, potentially representing nominal or ordinal categories.\n\nThis function does not modify the DataFrame. It prints informative messages to help users understand their data structure and the optimization decisions made by the package.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndf\npd.DataFrame\nThe DataFrame to analyze for special column patterns.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nNone\nThis function prints its findings to stdout and does not return a value.\n\n\n\n\n\n\n\nUses regex patterns to match common naming conventions\nAnalyzes both column names and data characteristics\nProvides tag output for easy visual scanning:    \nDetection heuristics may not catch all special cases; review output carefully\n\n\n\n\n&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; df = pd.DataFrame({\n...     'customer_id': range(1000),\n...     'latitude': [37.7749] * 1000,\n...     'longitude': [-122.4194] * 1000,\n...     'full_name': [f'Person {i}' for i in range(1000)],\n...     'membership_level': pd.Categorical(\n...         ['gold', 'silver', 'bronze'] * 333 + ['gold']\n...     )\n... })\n&gt;&gt;&gt; \n&gt;&gt;&gt; optimize_special(df)\n— Special Column Analysis — customer_id: Identified as potential Unique ID (high cardinality). latitude: Identified as geographic coordinate column. longitude: Identified as geographic coordinate column. full_name: Identified as high-cardinality text column. membership_level: Identified as categorical or ordinal data (category dtype).\n&gt;&gt;&gt; df2 = pd.DataFrame({\n...     'uuid': ['a1b2c3'] * 500 + ['d4e5f6'] * 500,\n...     'order_key': range(1000),\n...     'lat': [40.7128] * 1000,\n...     'delivery_address': [f'{i} Main St' for i in range(1000)]\n... })\n&gt;&gt;&gt; \n&gt;&gt;&gt; optimize_special(df2)\n— Special Column Analysis — order_key: Identified as potential Unique ID (high cardinality). lat: Identified as geographic coordinate column. delivery_address: Identified as high-cardinality text column."
+  },
+  {
+    "objectID": "reference/optimize_special.optimize_special.html#parameters",
+    "href": "reference/optimize_special.optimize_special.html#parameters",
+    "title": "optimize_special.optimize_special",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ndf\npd.DataFrame\nThe DataFrame to analyze for special column patterns.\nrequired"
+  },
+  {
+    "objectID": "reference/optimize_special.optimize_special.html#returns",
+    "href": "reference/optimize_special.optimize_special.html#returns",
+    "title": "optimize_special.optimize_special",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nNone\nThis function prints its findings to stdout and does not return a value."
+  },
+  {
+    "objectID": "reference/optimize_special.optimize_special.html#notes",
+    "href": "reference/optimize_special.optimize_special.html#notes",
+    "title": "optimize_special.optimize_special",
+    "section": "",
+    "text": "Uses regex patterns to match common naming conventions\nAnalyzes both column names and data characteristics\nProvides tag output for easy visual scanning:    \nDetection heuristics may not catch all special cases; review output carefully"
+  },
+  {
+    "objectID": "reference/optimize_special.optimize_special.html#examples",
+    "href": "reference/optimize_special.optimize_special.html#examples",
+    "title": "optimize_special.optimize_special",
+    "section": "",
+    "text": "&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; df = pd.DataFrame({\n...     'customer_id': range(1000),\n...     'latitude': [37.7749] * 1000,\n...     'longitude': [-122.4194] * 1000,\n...     'full_name': [f'Person {i}' for i in range(1000)],\n...     'membership_level': pd.Categorical(\n...         ['gold', 'silver', 'bronze'] * 333 + ['gold']\n...     )\n... })\n&gt;&gt;&gt; \n&gt;&gt;&gt; optimize_special(df)\n— Special Column Analysis — customer_id: Identified as potential Unique ID (high cardinality). latitude: Identified as geographic coordinate column. longitude: Identified as geographic coordinate column. full_name: Identified as high-cardinality text column. membership_level: Identified as categorical or ordinal data (category dtype).\n&gt;&gt;&gt; df2 = pd.DataFrame({\n...     'uuid': ['a1b2c3'] * 500 + ['d4e5f6'] * 500,\n...     'order_key': range(1000),\n...     'lat': [40.7128] * 1000,\n...     'delivery_address': [f'{i} Main St' for i in range(1000)]\n... })\n&gt;&gt;&gt; \n&gt;&gt;&gt; optimize_special(df2)\n— Special Column Analysis — order_key: Identified as potential Unique ID (high cardinality). lat: Identified as geographic coordinate column. delivery_address: Identified as high-cardinality text column."
+  },
+  {
+    "objectID": "reference/optimize_categorical.optimize_categorical.html",
+    "href": "reference/optimize_categorical.optimize_categorical.html",
+    "title": "optimize_categorical.optimize_categorical",
+    "section": "",
+    "text": "optimize_categorical.optimize_categorical(df, max_unique_ratio=0.5)\nThis function makes a copy of a DataFrame (df) and looks through all the string columns. It counts the number of unique strings and calculates the ratio of the unique values to the total number of rows. If this ratio is below a chosen threshold in this function, it converts the column to category dtype. This function returns a dataframe with the converted columns and prints the number of columns that have been updated.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ndf\npd.DataFrame\nThe DataFrame containing string columns.\nrequired\n\n\nmax_unique_ratio\nfloat\nThe maximum ratio of (unique_values / total_rows) for categorical conversion. - 0.5 means convert if unique values are less than 50% of total rows - Lower values (e.g., 0.3) make conversion more conservative - Higher values (e.g., 0.7) make conversion more aggressive\n0.5\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\npd.DataFrame\nThe DataFrame with eligible string columns converted to category dtype.\n\n\n\n\n\n\n\n\n\nimport pandas as pd data = { ‘user_id’: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], ‘name’: [‘Alice’, ‘Bobby’, ‘Charles’, ‘Ally’, ‘Bob’, ‘Charlie’, ‘David’, ‘Alex’, ‘Ben’, ‘Cherry’], ‘city’: [‘NYC’, ‘LA’, ‘NYC’, ‘Chicago’, ‘LA’, ‘NYC’, ‘LA’, ‘Chicago’, ‘NYC’, ‘LA’], ‘status’: [‘active’, ‘inactive’, ‘active’, ‘active’, ‘inactive’, ‘active’, ‘inactive’, ‘active’, ‘active’, ‘inactive’]} df = pd.DataFrame(data) df.dtypes user_id int64 name object city object status object dtype: object\n\n\n\n\n\n\noptimized_df = optimize_categorical(df, max_unique_ratio=0.5) Converted 2 column(s) to ‘category’ dtype.\n\n\n\n\n\n\noptimized_df.dtypes user_id int64 name object city category status category dtype: object\n\n\n\n\n\n\noptimized_df.info() &lt;class ‘pandas.core.frame.DataFrame’&gt; RangeIndex: 10 entries, 0 to 9 Data columns (total 4 columns):\n\n\n\n\n\n\n0 user_id 10 non-null int64 1 name 10 non-null object 2 city 10 non-null category 3 status 10 non-null category\ndtypes: category(2), int64(1), object(1)\n\n\n\n\nOnly processes columns with ‘object’ dtype (typically strings)\nPrints the number of columns successfully converted\nConversion is reversible using .astype(‘object’) if needed\nCategorical columns maintain the same values and ordering"
+  },
+  {
+    "objectID": "reference/optimize_categorical.optimize_categorical.html#parameters",
+    "href": "reference/optimize_categorical.optimize_categorical.html#parameters",
+    "title": "optimize_categorical.optimize_categorical",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ndf\npd.DataFrame\nThe DataFrame containing string columns.\nrequired\n\n\nmax_unique_ratio\nfloat\nThe maximum ratio of (unique_values / total_rows) for categorical conversion. - 0.5 means convert if unique values are less than 50% of total rows - Lower values (e.g., 0.3) make conversion more conservative - Higher values (e.g., 0.7) make conversion more aggressive\n0.5"
+  },
+  {
+    "objectID": "reference/optimize_categorical.optimize_categorical.html#returns",
+    "href": "reference/optimize_categorical.optimize_categorical.html#returns",
+    "title": "optimize_categorical.optimize_categorical",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\npd.DataFrame\nThe DataFrame with eligible string columns converted to category dtype."
+  },
+  {
+    "objectID": "reference/optimize_categorical.optimize_categorical.html#example",
+    "href": "reference/optimize_categorical.optimize_categorical.html#example",
+    "title": "optimize_categorical.optimize_categorical",
+    "section": "",
+    "text": "import pandas as pd data = { ‘user_id’: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], ‘name’: [‘Alice’, ‘Bobby’, ‘Charles’, ‘Ally’, ‘Bob’, ‘Charlie’, ‘David’, ‘Alex’, ‘Ben’, ‘Cherry’], ‘city’: [‘NYC’, ‘LA’, ‘NYC’, ‘Chicago’, ‘LA’, ‘NYC’, ‘LA’, ‘Chicago’, ‘NYC’, ‘LA’], ‘status’: [‘active’, ‘inactive’, ‘active’, ‘active’, ‘inactive’, ‘active’, ‘inactive’, ‘active’, ‘active’, ‘inactive’]} df = pd.DataFrame(data) df.dtypes user_id int64 name object city object status object dtype: object\n\n\n\n\n\n\noptimized_df = optimize_categorical(df, max_unique_ratio=0.5) Converted 2 column(s) to ‘category’ dtype.\n\n\n\n\n\n\noptimized_df.dtypes user_id int64 name object city category status category dtype: object\n\n\n\n\n\n\noptimized_df.info() &lt;class ‘pandas.core.frame.DataFrame’&gt; RangeIndex: 10 entries, 0 to 9 Data columns (total 4 columns):"
+  },
+  {
+    "objectID": "reference/optimize_categorical.optimize_categorical.html#column-non-null-count-dtype",
+    "href": "reference/optimize_categorical.optimize_categorical.html#column-non-null-count-dtype",
+    "title": "optimize_categorical.optimize_categorical",
+    "section": "",
+    "text": "0 user_id 10 non-null int64 1 name 10 non-null object 2 city 10 non-null category 3 status 10 non-null category\ndtypes: category(2), int64(1), object(1)"
+  },
+  {
+    "objectID": "reference/optimize_categorical.optimize_categorical.html#notes",
+    "href": "reference/optimize_categorical.optimize_categorical.html#notes",
+    "title": "optimize_categorical.optimize_categorical",
+    "section": "",
+    "text": "Only processes columns with ‘object’ dtype (typically strings)\nPrints the number of columns successfully converted\nConversion is reversible using .astype(‘object’) if needed\nCategorical columns maintain the same values and ordering"
   }
 ]
