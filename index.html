@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -108,36 +143,113 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#welcome-to-our-dataframe-memory-optimizer" id="toc-welcome-to-our-dataframe-memory-optimizer" class="nav-link active" data-scroll-target="#welcome-to-our-dataframe-memory-optimizer">Welcome to Our DataFrame Memory Optimizer</a>
+  <ul class="collapse">
+  <li><a href="#project-summary" id="toc-project-summary" class="nav-link" data-scroll-target="#project-summary">Project Summary</a></li>
+  <li><a href="#example-on-how-to-use-our-package" id="toc-example-on-how-to-use-our-package" class="nav-link" data-scroll-target="#example-on-how-to-use-our-package">Example on how to use our package</a></li>
+  <li><a href="#planned-functions" id="toc-planned-functions" class="nav-link" data-scroll-target="#planned-functions">Planned Functions</a></li>
+  <li><a href="#how-the-package-fits-in-the-python-ecosystem" id="toc-how-the-package-fits-in-the-python-ecosystem" class="nav-link" data-scroll-target="#how-the-package-fits-in-the-python-ecosystem">How the package fits in the Python Ecosystem</a></li>
+  </ul></li>
+  <li><a href="#developer-documentation" id="toc-developer-documentation" class="nav-link" data-scroll-target="#developer-documentation">Developer Documentation</a>
+  <ul class="collapse">
+  <li><a href="#how-the-package-fits-in-the-python-ecosystem-1" id="toc-how-the-package-fits-in-the-python-ecosystem-1" class="nav-link" data-scroll-target="#how-the-package-fits-in-the-python-ecosystem-1">How the Package Fits in the Python Ecosystem</a></li>
+  <li><a href="#copyright" id="toc-copyright" class="nav-link" data-scroll-target="#copyright">Copyright</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Dataframe Optimizer</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
+<section id="welcome-to-our-dataframe-memory-optimizer" class="level1">
+<h1>Welcome to Our DataFrame Memory Optimizer</h1>
+<p>This is a collaborative project developed as part of DSCI 524: Collaborative Software Development.</p>
+<section id="project-summary" class="level2">
+<h2 class="anchored" data-anchor-id="project-summary">Project Summary</h2>
+<p>DataFrame Memory Optimizer is a lightweight Python package that reduces the memory footprint of pandas DataFrames by automatically selecting more efficient data types. It analyzes each column in a DataFrame and applies safe, transparent optimizations such as numeric downcasting and categorical conversion while preserving the original data values. This will allow users to work more efficiently with large datasets in data analysis, machine learning pipelines, and resource-constrained environments.</p>
+</section>
+<section id="example-on-how-to-use-our-package" class="level2">
+<h2 class="anchored" data-anchor-id="example-on-how-to-use-our-package">Example on how to use our package</h2>
+<p>To use the DataFrame Memory Optimizer, start by importing optimize_dataframe from the group_32 package. Pass any pandas DataFrame to this function, and it will return a new optimized copy while leaving the original DataFrame unchanged. The optimizer automatically applies safe numeric downcasting, converts low-cardinality text columns to categorical types, and reports columns that were intentionally left unchanged (such as identifiers or high-cardinality text). The optimized DataFrame behaves the same as the original in downstream analysis, but typically uses less memory.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> group_32.optimize_dataframe <span class="im">import</span> optimize_dataframe</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simple DataFrame</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"region"</span>: [<span class="st">"US"</span>, <span class="st">"CA"</span>, <span class="st">"US"</span>, <span class="st">"US"</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"quantity"</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>],</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"price"</span>: [<span class="fl">10.5</span>, <span class="fl">12.0</span>, <span class="fl">9.99</span>, <span class="fl">11.25</span>]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimize memory usage</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>optimized_df <span class="op">=</span> optimize_dataframe(df)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect optimized dtypes</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(optimized_df.dtypes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="planned-functions" class="level2">
+<h2 class="anchored" data-anchor-id="planned-functions">Planned Functions</h2>
+<p>The package is designed around a simple, reproducible workflow: users call optimize_dataframe() once, and the function applies a consistent set of memory-saving steps while keeping the original DataFrame unchanged.</p>
+<p><code>optimize_dataframe(df)</code> The main user-facing entry point. It creates a copy of <code>df</code> and coordinates the full optimization pipeline by (1) downcasting numeric columns, (2) converting low-cardinality text columns to <code>category</code>, and (3) running a diagnostics pass to report columns that were intentionally left unchanged (e.g., IDs). Returns the optimized DataFrame.</p>
+<p><code>optimize_numeric(df)</code> Numeric optimizer used by <code>optimize_dataframe()</code>. It reduces memory usage by downcasting integer columns to the smallest safe integer dtype and optionally downcasting floating-point columns (e.g., float64 → float32) with minimal expected precision impact.</p>
+<p><code>optimize_categorical(df, max_unique_ratio=0.5)</code> Categorical optimizer used by <code>optimize_dataframe()</code>. It converts low-cardinality string/object columns to pandas category dtype based on the ratio of unique values to total rows. This is especially effective for repeated labels like status codes, regions, or categories.</p>
+<p><code>analyze_special_columns(df)</code> Diagnostics and transparency helper used by <code>optimize_dataframe()</code>. It identifies columns that may require special handling (e.g., high-cardinality IDs, coordinate columns, free-text fields) and reports them to help users understand optimization decisions. This function does not modify the DataFrame.</p>
+</section>
+<section id="how-the-package-fits-in-the-python-ecosystem" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-package-fits-in-the-python-ecosystem">How the package fits in the Python Ecosystem</h2>
+<p>Pandas provides low-level tools related to memory optimization, such as pd.to_numeric(…, downcast=…), DataFrame.convert_dtypes(), and DataFrame.memory_usage(deep=True). However, these tools require manual orchestration and do not provide a unified, opinionated workflow or clear diagnostics.</p>
+<p>DataFrame Memory Optimizer builds on these ideas by combining them into a single, reusable interface that applies consistent heuristics and reports its decisions, making DataFrame memory optimization easier, safer, and more reproducible.</p>
+</section>
+</section>
+<section id="developer-documentation" class="level1">
+<h1>Developer Documentation</h1>
+<p>The following sections describe how developers, instructors, and TAs can set up the project locally, run tests, and build/deploy documentation. ## 1. Clone the repository and set Up the Development Environment This project uses conda for environment management. To set up the development environment, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone git@github.com:UBC-MDS/DSCI_524_group32_df_optimizer.git</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> DSCI_524_group32_df_optimizer</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment.yml</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate dataframe-memory-optimizer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The environment.yml file contains all required dependencies for development, testing, and documentation. ## 2. Install the Package To install the package in development mode, navigate to the project root directory and run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-e</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This allows you to make changes to the source code and have them reflected immediately without reinstalling the package. ## 3. Run Tests To run the test suite, use pytest. From the project root directory, execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pytest</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This will discover and run all tests located in the tests/ directory. ## 4. Build and Serve Documentation The project uses quartodoc for documentation. To build and serve the documentation locally, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This will generate the documentation in the docs/ directory. You can then open the generated HTML files in your web browser to view the documentation. ## 5. Deploy Documentation (Automated) Documentation deployment is fully automated via GitHub Actions.</p>
+<p>Deployment workflow :-</p>
+<ul>
+<li>Triggered automatically on pushes to the main branch</li>
+<li>Builds documentation using Quarto</li>
+<li>Deploys the site to GitHub Pages</li>
+</ul>
+<p>The live documentation is available at:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">https://ubc-mds.github.io/DSCI_524_group32_df_optimizer/</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="how-the-package-fits-in-the-python-ecosystem-1" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-package-fits-in-the-python-ecosystem-1">How the Package Fits in the Python Ecosystem</h2>
+<p>Pandas provides low-level tools for memory optimization (e.g., pd.to_numeric(…, downcast=…), DataFrame.convert_dtypes()), but these require manual orchestration and offer limited transparency.</p>
+<p>DataFrame Memory Optimizer combines these tools into a single, opinionated workflow with clear diagnostics, making memory optimization easier, safer, and more reproducible. ## Contributors</p>
+<p>Mohammed Ibrahim</p>
+<p>Roganci Fontelera</p>
+<p>Wai Yan Lee</p>
+<p>William Chong</p>
+</section>
+<section id="copyright" class="level2">
+<h2 class="anchored" data-anchor-id="copyright">Copyright</h2>
+<ul>
+<li>Copyright © 2026 William Chong, Wai Yan Lee, Roganci Fontelera, Mohammed Ibrahim.</li>
+<li>Free software distributed under the <a href="./LICENSE">MIT License</a>.</li>
+</ul>
 
 
-</header>
-
-
-<p>Welcome to the <strong>Dataframe Optimizer</strong> package.</p>
-<p>This package provides tools for optimizing pandas DataFrames by reducing memory usage while preserving data types.</p>
-<p>Use the <strong>Reference</strong> tab to explore the API.</p>
-
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
