@@ -153,11 +153,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#project-summary" id="toc-project-summary" class="nav-link" data-scroll-target="#project-summary">Project Summary</a></li>
   <li><a href="#example-on-how-to-use-our-package" id="toc-example-on-how-to-use-our-package" class="nav-link" data-scroll-target="#example-on-how-to-use-our-package">Example on how to use our package</a></li>
   <li><a href="#planned-functions" id="toc-planned-functions" class="nav-link" data-scroll-target="#planned-functions">Planned Functions</a></li>
-  <li><a href="#how-the-package-fits-in-the-python-ecosystem" id="toc-how-the-package-fits-in-the-python-ecosystem" class="nav-link" data-scroll-target="#how-the-package-fits-in-the-python-ecosystem">How the package fits in the Python Ecosystem</a></li>
   </ul></li>
   <li><a href="#developer-documentation" id="toc-developer-documentation" class="nav-link" data-scroll-target="#developer-documentation">Developer Documentation</a>
   <ul class="collapse">
-  <li><a href="#how-the-package-fits-in-the-python-ecosystem-1" id="toc-how-the-package-fits-in-the-python-ecosystem-1" class="nav-link" data-scroll-target="#how-the-package-fits-in-the-python-ecosystem-1">How the Package Fits in the Python Ecosystem</a></li>
+  <li><a href="#how-the-package-fits-in-the-python-ecosystem" id="toc-how-the-package-fits-in-the-python-ecosystem" class="nav-link" data-scroll-target="#how-the-package-fits-in-the-python-ecosystem">How the Package Fits in the Python Ecosystem</a></li>
   <li><a href="#copyright" id="toc-copyright" class="nav-link" data-scroll-target="#copyright">Copyright</a></li>
   </ul></li>
   </ul>
@@ -171,6 +170,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="welcome-to-our-dataframe-memory-optimizer" class="level1">
 <h1>Welcome to Our DataFrame Memory Optimizer</h1>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Package</td>
+<td><a href="https://pypi.org/project/DSCI_524_group32_df_optimizer/"><img src="https://img.shields.io/pypi/v/DSCI_524_group32_df_optimizer.svg" class="img-fluid" alt="Latest PyPI Version"></a> <a href="https://pypi.org/project/DSCI_524_group32_df_optimizer/"><img src="https://img.shields.io/pypi/pyversions/DSCI_524_group32_df_optimizer.svg" class="img-fluid" alt="Supported Python Versions"></a></td>
+</tr>
+<tr class="even">
+<td>Meta</td>
+<td><a href="CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" class="img-fluid" alt="Code of Conduct"></a></td>
+</tr>
+</tbody>
+</table>
 <p>This is a collaborative project developed as part of DSCI 524: Collaborative Software Development.</p>
 <section id="project-summary" class="level2">
 <h2 class="anchored" data-anchor-id="project-summary">Project Summary</h2>
@@ -203,11 +214,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>optimize_categorical(df, max_unique_ratio=0.5)</code> Categorical optimizer used by <code>optimize_dataframe()</code>. It converts low-cardinality string/object columns to pandas category dtype based on the ratio of unique values to total rows. This is especially effective for repeated labels like status codes, regions, or categories.</p>
 <p><code>analyze_special_columns(df)</code> Diagnostics and transparency helper used by <code>optimize_dataframe()</code>. It identifies columns that may require special handling (e.g., high-cardinality IDs, coordinate columns, free-text fields) and reports them to help users understand optimization decisions. This function does not modify the DataFrame.</p>
 </section>
-<section id="how-the-package-fits-in-the-python-ecosystem" class="level2">
-<h2 class="anchored" data-anchor-id="how-the-package-fits-in-the-python-ecosystem">How the package fits in the Python Ecosystem</h2>
-<p>Pandas provides low-level tools related to memory optimization, such as pd.to_numeric(…, downcast=…), DataFrame.convert_dtypes(), and DataFrame.memory_usage(deep=True). However, these tools require manual orchestration and do not provide a unified, opinionated workflow or clear diagnostics.</p>
-<p>DataFrame Memory Optimizer builds on these ideas by combining them into a single, reusable interface that applies consistent heuristics and reports its decisions, making DataFrame memory optimization easier, safer, and more reproducible.</p>
-</section>
 </section>
 <section id="developer-documentation" class="level1">
 <h1>Developer Documentation</h1>
@@ -231,8 +237,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>The live documentation is available at:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">https://ubc-mds.github.io/DSCI_524_group32_df_optimizer/</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="how-the-package-fits-in-the-python-ecosystem-1" class="level2">
-<h2 class="anchored" data-anchor-id="how-the-package-fits-in-the-python-ecosystem-1">How the Package Fits in the Python Ecosystem</h2>
+<section id="how-the-package-fits-in-the-python-ecosystem" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-package-fits-in-the-python-ecosystem">How the Package Fits in the Python Ecosystem</h2>
 <p>Pandas provides low-level tools for memory optimization (e.g., pd.to_numeric(…, downcast=…), DataFrame.convert_dtypes()), but these require manual orchestration and offer limited transparency.</p>
 <p>DataFrame Memory Optimizer combines these tools into a single, opinionated workflow with clear diagnostics, making memory optimization easier, safer, and more reproducible. ## Contributors</p>
 <p>Mohammed Ibrahim</p>
