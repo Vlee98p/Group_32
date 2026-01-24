@@ -6,6 +6,8 @@ website:
   title: "Dataframe Optimizer"
   navbar:
     left:
+      - text: "Home"
+        href: index.qmd
       - text: "Reference"
         href: reference/index.qmd
 
