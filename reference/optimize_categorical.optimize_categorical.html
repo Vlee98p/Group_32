@@ -152,8 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
   <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
-  <li><a href="#column-non-null-count-dtype" id="toc-column-non-null-count-dtype" class="nav-link" data-scroll-target="#column-non-null-count-dtype"># Column Non-Null Count Dtype</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
   </ul></li>
   </ul>
@@ -226,43 +225,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="example" class="level2 doc-section doc-section-example">
-<h2 class="doc-section doc-section-example anchored" data-anchor-id="example">Example</h2>
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<p>import pandas as pd</p>
-<p>data = { … ‘user_id’: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], … ‘name’: [‘Alice’, ‘Bobby’, ‘Charles’, ‘Ally’, ‘Bob’, ‘Charlie’, ‘David’, ‘Alex’, ‘Ben’, ‘Cherry’], … ‘city’: [‘NYC’, ‘LA’, ‘NYC’, ‘Chicago’, ‘LA’, ‘NYC’, ‘LA’, ‘Chicago’, ‘NYC’, ‘LA’], … ‘status’: [‘active’, ‘inactive’, ‘active’, ‘active’, ‘inactive’, ‘active’, ‘inactive’, ‘active’, ‘active’, ‘inactive’]}</p>
-<p>df = pd.DataFrame(data) df.dtypes user_id int64 name object city object status object dtype: object</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<p>optimized_df = optimize_categorical(df, max_unique_ratio=0.5) … Converted 2 column(s) to ‘category’ dtype.</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<p>optimized_df.dtypes user_id int64 name object city category status category dtype: object</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<p>optimized_df.info() &lt;class ‘pandas.core.frame.DataFrame’&gt; RangeIndex: 10 entries, 0 to 9 Data columns (total 4 columns):</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</section>
-<section id="column-non-null-count-dtype" class="level2 doc-section doc-section-----column--non-null-count--dtype---">
-<h2 class="doc-section doc-section-----column--non-null-count--dtype--- anchored" data-anchor-id="column-non-null-count-dtype"># Column Non-Null Count Dtype</h2>
-<p>0 user_id 10 non-null int64 1 name 10 non-null object 2 city 10 non-null category 3 status 10 non-null category<br>
-dtypes: category(2), int64(1), object(1)</p>
+<section id="examples" class="level2 doc-section doc-section-examples">
+<h2 class="doc-section doc-section-examples anchored" data-anchor-id="examples">Examples</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> data <span class="op">=</span> {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>...     <span class="st">'user_id'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>],</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>...     <span class="st">'name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bobby'</span>, <span class="st">'Charles'</span>, <span class="st">'Ally'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>, <span class="st">'David'</span>, <span class="st">'Alex'</span>, <span class="st">'Ben'</span>, <span class="st">'Cherry'</span>],</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>...     <span class="st">'city'</span>: [<span class="st">'NYC'</span>, <span class="st">'LA'</span>, <span class="st">'NYC'</span>, <span class="st">'Chicago'</span>, <span class="st">'LA'</span>, <span class="st">'NYC'</span>, <span class="st">'LA'</span>, <span class="st">'Chicago'</span>, <span class="st">'NYC'</span>, <span class="st">'LA'</span>],</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>...     <span class="st">'status'</span>: [<span class="st">'active'</span>, <span class="st">'inactive'</span>, <span class="st">'active'</span>, <span class="st">'active'</span>, <span class="st">'inactive'</span>, <span class="st">'active'</span>, <span class="st">'inactive'</span>, <span class="st">'active'</span>, <span class="st">'active'</span>, <span class="st">'inactive'</span>]}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> df.dtypes</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>user_id  int64</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>name     <span class="bu">object</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>city     <span class="bu">object</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>status   <span class="bu">object</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>dtype: <span class="bu">object</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> optimized_df <span class="op">=</span> optimize_categorical(df, max_unique_ratio<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>...     Converted <span class="dv">2</span> column(s) to <span class="st">'category'</span> dtype.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> optimized_df.dtypes</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>user_id  int64</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>name     <span class="bu">object</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>city     category</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>status   category</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>dtype: <span class="bu">object</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> optimized_df.info()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span><span class="kw">class</span> <span class="st">'pandas.core.frame.DataFrame'</span><span class="op">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>RangeIndex: <span class="dv">10</span> entries, <span class="dv">0</span> to <span class="dv">9</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>Data columns (total <span class="dv">4</span> columns):</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a> <span class="co">#   Column  Non-Null Count  Dtype   </span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">---</span>  <span class="op">------</span>  <span class="op">--------------</span>  <span class="op">-----</span>   </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">0</span>   user_id <span class="dv">10</span> non<span class="op">-</span>null    int64</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>   name    <span class="dv">10</span> non<span class="op">-</span>null    <span class="bu">object</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>   city    <span class="dv">10</span> non<span class="op">-</span>null    category</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>   status  <span class="dv">10</span> non<span class="op">-</span>null    category   </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>dtypes: category(<span class="dv">2</span>), int64(<span class="dv">1</span>), <span class="bu">object</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="notes" class="level2 doc-section doc-section-notes">
 <h2 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h2>
