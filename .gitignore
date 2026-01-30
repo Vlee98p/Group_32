@@ -251,3 +251,6 @@ _version.py
 
 /.quarto/
 **/*.quarto_ipynb
+
+src/group_32/__version__.py
+

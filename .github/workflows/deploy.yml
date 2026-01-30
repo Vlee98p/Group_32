@@ -3,7 +3,8 @@ name: deploy-test-pypi
 on:
   push:
     branches: [main]
-    #tags: [ "v*.*.*" ]
+    tags: 
+      - "v*" 
 
   workflow_dispatch:
 
@@ -14,6 +15,8 @@ jobs:
     steps:
       - name: Check-out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -61,3 +64,5 @@ jobs:
         with:
           repository-url: https://test.pypi.org/legacy/
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          verbose: true
+          #skip-existing: true
