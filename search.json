@@ -207,7 +207,7 @@
     "href": "CHANGELOG.html",
     "title": "Changelog",
     "section": "",
-    "text": "All notable changes to this project will be documented in this file.\nThe format is based on Keep a Changelog, and this project adheres to Semantic Versioning.\n\n\n\nInitial release of the dataframe optimizer package.\nwrot documentation for functions and usage examples.\n\n\n\n\n\nCore function to reduce pandas DataFrame memory footprint via dtype optimization.\nInput validation to ensure only pandas DataFrames are accepted.\nUnit tests covering common numeric and categorical optimization scenarios.\n\n\n\n\n\nGitHub Actions workflow for automated testing on push and pull requests.\nQuarto-based documentation website with usage examples and API references.\nadded tests for functions to test the workflow deployment automation.\n\n\n\n\n\nAutomated version release and deployment to TestPyPI via GitHub Actions upon merging to main branch.\nUpdated documentation with installation instructions from TestPyPI.\naddressed issues from peer reviews and improved error handling.\n\n\n\n\n\nAdded clickable link for documentation site in README.md\nAdded installation instructions for TestPyPI in README.md\nFixed examples docstring for optimize_categorical.py script\nRemoved Submission folder\n\n\n\n\n\nAdded tutorial.md\nAdded netlify\nAdded codecov badge got coverage\nAdded Jupyter as a dependency on pyproject.toml"
+    "text": "All notable changes to this project will be documented in this file.\nThe format is based on Keep a Changelog, and this project adheres to Semantic Versioning.\n\n\n\nInitial release of the dataframe optimizer package.\nwrot documentation for functions and usage examples.\n\n\n\n\n\nCore function to reduce pandas DataFrame memory footprint via dtype optimization.\nInput validation to ensure only pandas DataFrames are accepted.\nUnit tests covering common numeric and categorical optimization scenarios.\n\n\n\n\n\nGitHub Actions workflow for automated testing on push and pull requests.\nQuarto-based documentation website with usage examples and API references.\nadded tests for functions to test the workflow deployment automation.\n\n\n\n\n\nAutomated version release and deployment to TestPyPI via GitHub Actions upon merging to main branch.\nUpdated documentation with installation instructions from TestPyPI.\naddressed issues from peer reviews and improved error handling.\n\n\n\n\n\nAdded clickable link for documentation site in README.md\nAdded installation instructions for TestPyPI in README.md\nFixed examples docstring for optimize_categorical.py script\nRemoved Submission folder\nFix optimize_categorical.py\n\n\n\n\n\nAdded tutorial.md\nAdded netlify\nAdded codecov badge got coverage\nAdded Jupyter as a dependency on pyproject.toml\nUpdate CONTRIBUTING.md"
   },
   {
     "objectID": "CHANGELOG.html#section",
@@ -242,14 +242,14 @@
     "href": "CHANGELOG.html#peer-review-changes---2026-01-29",
     "title": "Changelog",
     "section": "",
-    "text": "Added clickable link for documentation site in README.md\nAdded installation instructions for TestPyPI in README.md\nFixed examples docstring for optimize_categorical.py script\nRemoved Submission folder"
+    "text": "Added clickable link for documentation site in README.md\nAdded installation instructions for TestPyPI in README.md\nFixed examples docstring for optimize_categorical.py script\nRemoved Submission folder\nFix optimize_categorical.py"
   },
   {
     "objectID": "CHANGELOG.html#section-4",
     "href": "CHANGELOG.html#section-4",
     "title": "Changelog",
     "section": "",
-    "text": "Added tutorial.md\nAdded netlify\nAdded codecov badge got coverage\nAdded Jupyter as a dependency on pyproject.toml"
+    "text": "Added tutorial.md\nAdded netlify\nAdded codecov badge got coverage\nAdded Jupyter as a dependency on pyproject.toml\nUpdate CONTRIBUTING.md"
   },
   {
     "objectID": "DEVELOPMENT.html",
