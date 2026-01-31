@@ -7,7 +7,9 @@ format:
 ---
 
 ## Overview
-Thank you for choosing `df_optimizer`! Our custom function aims to reduce pandas DataFrame memory usage **safely** while preserving the original values.
+Thank you for choosing `df_optimizer`! 
+
+Our custom function aims to reduce pandas DataFrame memory usage **safely** while preserving the original values.
 
 **Primary (recommended) function**
 
