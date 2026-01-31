@@ -2,7 +2,7 @@ name: deploy-test-pypi
 
 on:
   push:
-    #branches: [main]
+    branches: [main]
     tags: 
       - "v*" 
 
