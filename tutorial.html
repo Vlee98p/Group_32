@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>optimize_categorical.optimize_categorical – Dataframe Optimizer</title>
+<title>df_optimizer Tutorial – Dataframe Optimizer</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,24 +58,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Dataframe Optimizer</span>
     </a>
   </div>
@@ -125,15 +125,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../tutorial.html"> 
+    <a class="nav-link active" href="./tutorial.html" aria-current="page"> 
 <span class="menu-text">Tutorial</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../README.md"> 
+    <a class="nav-link" href="./README.md"> 
 <span class="menu-text">README</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../reference/index.html"> 
+    <a class="nav-link" href="./reference/index.html"> 
 <span class="menu-text">Reference</span></a>
   </li>  
 </ul>
@@ -152,128 +152,278 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#group_32.optimize_categorical.optimize_categorical" id="toc-group_32.optimize_categorical.optimize_categorical" class="nav-link active" data-scroll-target="#group_32.optimize_categorical.optimize_categorical">optimize_categorical.optimize_categorical</a>
-  <ul class="collapse">
-  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
-  <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
-  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
-  </ul></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#installation-reminder" id="toc-installation-reminder" class="nav-link" data-scroll-target="#installation-reminder">Installation Reminder</a></li>
+  <li><a href="#imports" id="toc-imports" class="nav-link" data-scroll-target="#imports">Imports</a></li>
+  <li><a href="#creating-sample-data" id="toc-creating-sample-data" class="nav-link" data-scroll-target="#creating-sample-data">Creating Sample Data</a></li>
+  <li><a href="#our-recommended-primary-workflow" id="toc-our-recommended-primary-workflow" class="nav-link" data-scroll-target="#our-recommended-primary-workflow">Our Recommended Primary Workflow</a></li>
+  <li><a href="#modular-functions" id="toc-modular-functions" class="nav-link" data-scroll-target="#modular-functions">Modular Functions</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">df_optimizer Tutorial</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="group_32.optimize_categorical.optimize_categorical" class="level1">
-<h1>optimize_categorical.optimize_categorical</h1>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>optimize_categorical.optimize_categorical(df, max_unique_ratio<span class="op">=</span><span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This function makes a copy of a DataFrame (df) and looks through all the string columns. It counts the number of unique strings and calculates the ratio of the unique values to the total number of rows. If this ratio is below a chosen threshold in this function, it converts the column to category dtype. This function returns a dataframe with the converted columns and prints the number of columns that have been updated.</p>
-<section id="parameters" class="level2 doc-section doc-section-parameters">
-<h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Thank you for choosing <code>df_optimizer</code>!</p>
+<p>Our custom function aims to reduce pandas DataFrame memory usage <strong>safely</strong> while preserving the original values.</p>
+<p><strong>Primary (recommended) function</strong></p>
+<p><code>optimize_dataframe(df)</code>: runs the full safe optimization pipeline.</p>
+<p><strong>Modular (optional) functions</strong></p>
+<p><code>optimize_numeric(df, verbose=True)</code>: downcasts numeric columns where safe.</p>
+<p><code>optimize_categorical(df, max_unique_ratio=0.5)</code>: converts eligible string/object columns to <code>category</code>.</p>
+<p><code>optimize_special(df)</code>: prints a diagnostic report for “special” columns (IDs, coordinates, high-cardinality text). <strong>Does not modify the DataFrame.</strong></p>
+<p>Below is the tutorial that demonstrates <strong>all 4 functions</strong> with runnable examples with sample data.</p>
+</section>
+<section id="installation-reminder" class="level2">
+<h2 class="anchored" data-anchor-id="installation-reminder">Installation Reminder</h2>
+<p>Detailed project set up steps are in the README file</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-i</span> https://test.pypi.org/simple/ DSCI-524-group32-df-optimizer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Optional check to confirm installation</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import group_32; print('Imported group_32 successfully')"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="imports" class="level2">
+<h2 class="anchored" data-anchor-id="imports">Imports</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> group_32 <span class="im">import</span> (</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    optimize_dataframe,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    optimize_numeric,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    optimize_categorical,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    optimize_special,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="creating-sample-data" class="level2">
+<h2 class="anchored" data-anchor-id="creating-sample-data">Creating Sample Data</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"customer_id"</span>: np.arange(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>),                          <span class="co"># high-cardinality ID-like column</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"status"</span>: np.random.choice([<span class="st">"pending"</span>, <span class="st">"shipped"</span>], size<span class="op">=</span>n),  <span class="co"># low-cardinality strings</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"city"</span>: np.random.choice([<span class="st">"Vancouver"</span>, <span class="st">"Whistler"</span>, <span class="st">"Squamish"</span>], size<span class="op">=</span>n),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"quantity"</span>: np.random.randint(<span class="dv">0</span>, <span class="dv">120</span>, size<span class="op">=</span>n),               <span class="co"># small integers</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"price"</span>: np.random.normal(<span class="dv">50</span>, <span class="dv">10</span>, size<span class="op">=</span>n),                   <span class="co"># floats (often float64 initially)</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"latitude"</span>: np.repeat(<span class="fl">49.2827</span>, n),                           <span class="co"># coordinate-like column</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"longitude"</span>: np.repeat(<span class="op">-</span><span class="fl">123.1207</span>, n),                        <span class="co"># coordinate-like column</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"notes"</span>: [<span class="ss">f"free text row </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)],           <span class="co"># high-cardinality text</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="our-recommended-primary-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="our-recommended-primary-workflow">Our Recommended Primary Workflow</h2>
+<p>optimize_dataframe(df) is the main user-facing function. It:</p>
+<ol type="1">
+<li><p>makes a copy (does not mutate your input)</p></li>
+<li><p>downcasts numeric columns using optimize_numeric,</p></li>
+<li><p>converts eligible string columns using optimize_categorical,</p></li>
+<li><p>prints a “special columns” report using optimize_special (no mutation).</p></li>
+</ol>
+<section id="purpose-of-our-main-function---optimize_dataframedf" class="level4">
+<h4 class="anchored" data-anchor-id="purpose-of-our-main-function---optimize_dataframedf">Purpose of our main function - optimize_dataframe(df)</h4>
+<p>Run the full optimization pipeline and compare dtypes before vs after.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>optimized <span class="op">=</span> optimize_dataframe(df)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">"original"</span>: df.dtypes, <span class="st">"optimized"</span>: optimized.dtypes})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="for-comparing-memory-usage-before-and-after" class="level4">
+<h4 class="anchored" data-anchor-id="for-comparing-memory-usage-before-and-after">For comparing memory usage before and after</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>after_mb <span class="op">=</span> optimized.memory_usage(deep<span class="op">=</span><span class="va">True</span>).<span class="bu">sum</span>() <span class="op">/</span> <span class="dv">1024</span><span class="op">**</span><span class="dv">2</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>(after_mb, (before_mb <span class="op">-</span> after_mb) <span class="op">/</span> before_mb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="expected-outcome" class="level4">
+<h4 class="anchored" data-anchor-id="expected-outcome">Expected outcome</h4>
+<ol type="1">
+<li><p><code>quantity</code> downcasts to a smaller integer dtype (e.g., <code>int8</code> or <code>int16</code>),</p></li>
+<li><p><code>price</code> downcasts to <code>float32</code> (possible minor precision differences),</p></li>
+<li><p><code>status</code> and <code>city</code> become <code>category</code>,</p></li>
+<li><p><code>customer_id</code> and notes remain unchanged (but may be reported as special).</p></li>
+</ol>
+</section>
+</section>
+<section id="modular-functions" class="level2">
+<h2 class="anchored" data-anchor-id="modular-functions">Modular Functions</h2>
+<p>Usage on functions that were being called in <code>optimize_dataframe(df)</code></p>
+<p>Use these if you want only part of the pipeline.</p>
+<section id="optimize_numericdf-verbosetrue" class="level4">
+<h4 class="anchored" data-anchor-id="optimize_numericdf-verbosetrue"><code>optimize_numeric(df, verbose=True)</code></h4>
+<p>Downcasts integer and float columns to smaller dtypes where possible.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>num_only <span class="op">=</span> optimize_numeric(df, verbose<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"original"</span>: df.dtypes, </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"num_only"</span>: num_only.dtypes</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Expected output</strong></p>
+<p>A two-column table comparing dtypes before and after numeric optimization:</p>
+<ul>
+<li>Integer columns are downcast to the smallest safe integer dtype (e.g.&nbsp;<code>int64</code> → <code>int8</code> or <code>int16</code>)</li>
+<li>Floating-point columns may be downcast from <code>float64</code> to <code>float32</code></li>
+<li>Non-numeric columns are unchanged</li>
+<li>When <code>verbose=True</code>, informational messages are printed describing each downcast</li>
+</ul>
+<p>Example (schematic):</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 5%">
-<col style="width: 4%">
-<col style="width: 85%">
-<col style="width: 3%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
+<th>column</th>
+<th>original</th>
+<th>num_only</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>df</td>
-<td>pd.DataFrame</td>
-<td>The DataFrame containing string columns.</td>
-<td><em>required</em></td>
+<td>customer_id</td>
+<td>int64</td>
+<td>int32</td>
 </tr>
 <tr class="even">
-<td>max_unique_ratio</td>
-<td>float</td>
-<td>The maximum ratio of (unique_values / total_rows) for categorical conversion. - 0.5 means convert if unique values are less than 50% of total rows - Lower values (e.g., 0.3) make conversion more conservative - Higher values (e.g., 0.7) make conversion more aggressive</td>
-<td><code>0.5</code></td>
+<td>status</td>
+<td>object</td>
+<td>object</td>
+</tr>
+<tr class="odd">
+<td>city</td>
+<td>object</td>
+<td>object</td>
+</tr>
+<tr class="even">
+<td>quantity</td>
+<td>int64</td>
+<td>int8</td>
+</tr>
+<tr class="odd">
+<td>price</td>
+<td>float64</td>
+<td>float32</td>
+</tr>
+<tr class="even">
+<td>latitude</td>
+<td>float64</td>
+<td>float32</td>
+</tr>
+<tr class="odd">
+<td>longitude</td>
+<td>float64</td>
+<td>float32</td>
+</tr>
+<tr class="even">
+<td>notes</td>
+<td>object</td>
+<td>object</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="returns" class="level2 doc-section doc-section-returns">
-<h2 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h2>
+<section id="optimize_categoricaldf-max_unique_ratio0.5" class="level4">
+<h4 class="anchored" data-anchor-id="optimize_categoricaldf-max_unique_ratio0.5"><code>optimize_categorical(df, max_unique_ratio=0.5)</code></h4>
+<p>Converts eligible object columns to category when: (number of unique values) / (number of rows) &lt;= max_unique_ratio</p>
+<p>Note that: Lower max_unique_ratio -&gt; fewer columns become category (more conservative). Higher max_unique_ratio -&gt; more columns become category (more aggressive).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cat_default <span class="op">=</span> optimize_categorical(df, max_unique_ratio<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"original"</span>: df.dtypes, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cat_default"</span>: cat_default.dtypes</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Expected output</strong></p>
+<p>A two-column table comparing dtypes before and after optimization:</p>
+<ul>
+<li>Low-cardinality string columns (e.g.&nbsp;<code>status</code>, <code>city</code>) change from <code>object</code> to <code>category</code></li>
+<li>High-cardinality string columns (e.g.&nbsp;free-text fields) remain <code>object</code></li>
+<li>Numeric columns are unchanged by this function</li>
+</ul>
+<p>Example (schematic):</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 8%">
-<col style="width: 14%">
-<col style="width: 76%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>column</th>
+<th>original</th>
+<th>cat_default</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td>pd.DataFrame</td>
-<td>The DataFrame with eligible string columns converted to category dtype.</td>
+<td>customer_id</td>
+<td>int64</td>
+<td>int64</td>
+</tr>
+<tr class="even">
+<td>status</td>
+<td>object</td>
+<td>category</td>
+</tr>
+<tr class="odd">
+<td>city</td>
+<td>object</td>
+<td>category</td>
+</tr>
+<tr class="even">
+<td>quantity</td>
+<td>int64</td>
+<td>int64</td>
+</tr>
+<tr class="odd">
+<td>price</td>
+<td>float64</td>
+<td>float64</td>
+</tr>
+<tr class="even">
+<td>latitude</td>
+<td>float64</td>
+<td>float64</td>
+</tr>
+<tr class="odd">
+<td>longitude</td>
+<td>float64</td>
+<td>float64</td>
+</tr>
+<tr class="even">
+<td>notes</td>
+<td>object</td>
+<td>object</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="examples" class="level2 doc-section doc-section-examples">
-<h2 class="doc-section doc-section-examples anchored" data-anchor-id="examples">Examples</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> data <span class="op">=</span> {</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>...     <span class="st">'user_id'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>],</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>...     <span class="st">'name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bobby'</span>, <span class="st">'Charles'</span>, <span class="st">'Ally'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>, <span class="st">'David'</span>, <span class="st">'Alex'</span>, <span class="st">'Ben'</span>, <span class="st">'Cherry'</span>],</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>...     <span class="st">'city'</span>: [<span class="st">'NYC'</span>, <span class="st">'LA'</span>, <span class="st">'NYC'</span>, <span class="st">'Chicago'</span>, <span class="st">'LA'</span>, <span class="st">'NYC'</span>, <span class="st">'LA'</span>, <span class="st">'Chicago'</span>, <span class="st">'NYC'</span>, <span class="st">'LA'</span>],</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>...     <span class="st">'status'</span>: [<span class="st">'active'</span>, <span class="st">'inactive'</span>, <span class="st">'active'</span>, <span class="st">'active'</span>, <span class="st">'inactive'</span>, <span class="st">'active'</span>, <span class="st">'inactive'</span>, <span class="st">'active'</span>, <span class="st">'active'</span>, <span class="st">'inactive'</span>]}</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> df <span class="op">=</span> pd.DataFrame(data)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> df.dtypes</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>user_id  int64</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>name     <span class="bu">object</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>city     <span class="bu">object</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>status   <span class="bu">object</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>dtype: <span class="bu">object</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> optimized_df <span class="op">=</span> optimize_categorical(df, max_unique_ratio<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>...     Converted <span class="dv">2</span> column(s) to <span class="st">'category'</span> dtype.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> optimized_df.dtypes</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>user_id  int64</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>name     <span class="bu">object</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>city     category</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>status   category</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>dtype: <span class="bu">object</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> optimized_df.info()</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span><span class="kw">class</span> <span class="st">'pandas.core.frame.DataFrame'</span><span class="op">&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>RangeIndex: <span class="dv">10</span> entries, <span class="dv">0</span> to <span class="dv">9</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>Data columns (total <span class="dv">4</span> columns):</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a> <span class="co">#   Column  Non-Null Count  Dtype   </span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">---</span>  <span class="op">------</span>  <span class="op">--------------</span>  <span class="op">-----</span>   </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">0</span>   user_id <span class="dv">10</span> non<span class="op">-</span>null    int64</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>   name    <span class="dv">10</span> non<span class="op">-</span>null    <span class="bu">object</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>   city    <span class="dv">10</span> non<span class="op">-</span>null    category</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>   status  <span class="dv">10</span> non<span class="op">-</span>null    category   </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>dtypes: category(<span class="dv">2</span>), int64(<span class="dv">1</span>), <span class="bu">object</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="notes" class="level2 doc-section doc-section-notes">
-<h2 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h2>
-<ul>
-<li>Only processes columns with ‘object’ dtype (typically strings)</li>
-<li>Prints the number of columns successfully converted</li>
-<li>Conversion is reversible using .astype(‘object’) if needed</li>
-<li>Categorical columns maintain the same values and ordering</li>
-</ul>
+<section id="optimize_specialdf" class="level4">
+<h4 class="anchored" data-anchor-id="optimize_specialdf"><code>optimize_special(df)</code></h4>
+<p><code>optimize_special(df)</code> <strong>does not modify the DataFrame</strong>.<br>
+Instead, it prints a <strong>diagnostic report</strong> and returns <code>None</code>.</p>
+<p>This diagnostic helps you:</p>
+<ol type="1">
+<li>Spot columns that look like IDs (<code>*_id</code>, <code>uuid</code>, <code>key</code>) with very high cardinality<br>
+</li>
+<li>Identify coordinate-like columns (<code>lat</code>, <code>latitude</code>, <code>lon</code>, <code>longitude</code>)<br>
+</li>
+<li>Flag high-cardinality text columns where converting to <code>category</code> would not be beneficial</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>optimize_special(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Expected output</strong></p>
+<p>A summary of columns detected as ID-like, along with their number of unique values</p>
+<p>A list of coordinate columns detected by name and value patterns</p>
+<p>A list of high-cardinality text columns, with guidance on why they were not converted</p>
 
 
 </section>
