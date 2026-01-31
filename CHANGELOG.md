@@ -30,9 +30,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added installation instructions for TestPyPI in README.md
 - Fixed examples docstring for optimize_categorical.py script
 - Removed Submission folder
+- Fix optimize_categorical.py 
 
 ## [0.2.2] - 2026-01-31
 - Added tutorial.md
 - Added netlify
 - Added codecov badge got coverage
 - Added Jupyter as a dependency on pyproject.toml
+- Update CONTRIBUTING.md
+
+
+
+
